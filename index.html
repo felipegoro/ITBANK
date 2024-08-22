@@ -53,6 +53,23 @@
             <button type="submit">Calcular Interés</button>
         </form>
         <div id="resultadoPrestamo"></div>
+        <br>
+        <form id="currencyConverter">
+            <label for="monto">Monto a convertir:</label>
+            <input type="number" id="montopesos" step="0.01" required>
+    
+            <label for="moneda">Selecciona la moneda:</label>
+            <select id="moneda" required>
+                <option value="Dolar Oficial">Dólar Oficial</option>
+                <option value="Dolar Blue">Dólar Blue</option>
+                <option value="Euro Oficial">Euro Oficial</option>
+                <option value="Euro Blue">Euro Blue</option>
+            </select>
+    
+            <button type="submit">Convertir</button>
+        </form>
+    
+        <div id="resultadoPrestamo"></div>
         
     </main>
     <footer>

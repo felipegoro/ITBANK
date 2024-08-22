@@ -4,7 +4,12 @@ const usuarios = {
 };
 
 function validarInicioSesion(username, password) {
-    return usuariosValidos[username] === password;
+    if (usuariosValidos.hasOwnProperty(username)) {
+        if (usuariosValidos[username] === password) {
+            return true; 
+        }
+    }
+    return false; 
 }
 
 document.getElementById("loginForm").addEventListener("submit", function(event) {

@@ -18,6 +18,22 @@ async function valorDolar(moneda) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var fechaInput = document.getElementById('fecha');
+    var fechaActual = new Date();
+    
+    var fechaMinima = new Date(fechaActual);
+    fechaMinima.setDate(fechaActual.getDate() + 21);
+
+    var anio = fechaMinima.getFullYear();
+    var mes = String(fechaMinima.getMonth() + 1).padStart(2, '0'); 
+    var dia = String(fechaMinima.getDate()).padStart(2, '0');
+
+    var fechaFormato = anio + '-' + mes + '-' + dia;
+
+    fechaInput.setAttribute('min', fechaFormato);
+});
+
 document.getElementById('interestForm').addEventListener('submit', function(event) {
     event.preventDefault();
 

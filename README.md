@@ -9,6 +9,9 @@ pie de pagina (politicas de privacidad, informacion de contacto)
 
 
 
+ccon js editar las fechas limite del html para que no puedas pedir un prestamo a menos de x semanas
+
+
 
 
 

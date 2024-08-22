@@ -28,3 +28,4 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         document.getElementById("password").value = "";
     }
 });
+

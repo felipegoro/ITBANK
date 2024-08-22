@@ -54,7 +54,7 @@ header {
     background-color: #1b64d1;
     border-radius:10px;
     min-width: 160px;
-    box-shadow: 30px 50px 160px 10px rgba(61, 134, 243, 0.2);
+    box-shadow: 30px 50px 160px 10px rgba(51, 64, 82, 0.2);
     z-index: 10;
 }
 
@@ -67,7 +67,7 @@ header {
 }
 
 .dropdown-content a:hover {
-    background-color: #1577f8;
+    background-color: #001aff;
     
 }
 
@@ -80,24 +80,27 @@ main {
 }
 
 .login-container {
-    width: 50%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 600px;
     margin-left: auto; 
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
+    right: 70px;
+   
 }
 
 .login-form {
     background-color: #d3e6f8;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(78, 17, 243, 0.1);
+    box-shadow: 0 0 10px rgba(52, 47, 66, 0.1);
     width: 100%;
 }
 
 .login-form h2 {
-    margin-top: 0;
+    margin-top: 0px
 }
 
 .login-form label {
@@ -106,7 +109,7 @@ main {
 }
 
 .login-form input {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin-bottom: 12px;
     border: 1px solid #c3d0ff;
@@ -114,8 +117,8 @@ main {
 }
 
 .login-form button {
-    background-color: #142b44;
-    color: #8bb1eb;
+    background-color: #4f7dfc;
+    color: #ffffff;
     border: none;
     padding: 10px;
     border-radius: 5px;
@@ -124,7 +127,7 @@ main {
 }
 
 .login-form button:hover {
-    background-color: #3174bb;
+    background-color: #07192c;
 }
 
 
@@ -181,7 +184,7 @@ footer {
 .fondo {
     position: absolute; 
     margin-top: 10px;
-    top: 50px;
+    top: 5px;
     left: 0;
     width: 100%;
     height: 100vh; 
@@ -195,14 +198,73 @@ footer {
     position: relative; 
     text-align: right;
     z-index: 1; 
+<<<<<<< Updated upstream
     color: #fff;  
     padding : 20px;
+=======
+    color: #fff; 
+    padding: 20px;
+>>>>>>> Stashed changes
     text-align: center; 
 }
 
-.bienvenida h2, p {
+.bienvenida h1  {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 70px;             
+    font-weight: bold;          
+    color: #1877f2;              
+    letter-spacing: -0.5px;      
+    text-align: left         
+
+}
+
+.bienvenida p  {
+    text-align: left;
     position: relative;
-    top: 80xp;
+    top: 475px;
+    left: 40px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0px;
+    color: #ffffff; 
+    background-color: #4f7dfc; 
+    padding: 15px 200px;        
+    border-radius: 10px;       
+    display: inline-block;    
+    font-size: 1.2em;         
+
+
+
+}
+
+
+.fotologin img {
+    
+    width: 700px;    
+    height: auto;    
+    display: block;  
+    position: absolute; 
+    top: 240px;
+    left: 90px;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    z-index: -1; 
+
+}
+
+
+#footer-login {
+    
+    position: relative;
+    margin-top: 260px;
     
 }
 
+
+
+#footer-home {
+    
+    position: relative;
+    top: 300px;
+    
+}

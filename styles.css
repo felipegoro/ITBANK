@@ -15,7 +15,11 @@ header {
     align-items: center;
 }
 
+.logo a {
+    text-decoration: none;
+}
 .logo h1 {
+    color: rgb(255, 255, 255);
     margin: 0;
     font-size: 1.5em;
 }
@@ -133,17 +137,11 @@ footer {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    flex-wrap: nowrap;
-}
-
-footer .left,
-footer .center,
-footer .right {
-    flex: 1;
+    
 }
 
 
-footer  .left {
+.left {
     text-align: left;
     margin-left: 20px;
     
@@ -157,11 +155,11 @@ footer  .left {
     padding-bottom: 4px;
 }
 
-footer  .center {
+.center {
     text-align: center;
 }
 
-footer .right {
+.right {
     text-align: right;
     margin-right: 30px;
 }
@@ -197,7 +195,7 @@ footer .right {
     position: relative; 
     text-align: right;
     z-index: 1; 
-    color: #fff; / Color 
+    color: #fff;  
     padding : 20px;
     text-align: center; 
 }

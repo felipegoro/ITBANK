@@ -123,12 +123,63 @@ main {
     background-color: #3174bb;
 }
 
+
+
 footer {
     background-color: #021d3b;
     color: rgb(245, 247, 252);
-    text-align: justify;
-    padding: 30px 0;
+    padding: 10px 0;
+    margin-top: 640px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    flex-wrap: nowrap;
 }
+
+footer .left,
+footer .center,
+footer .right {
+    flex: 1;
+}
+
+
+footer  .left {
+    text-align: left;
+    margin-left: 20px;
+    
+}
+.left img {
+    width: 25px;  
+    height: auto;
+    margin-right: 5px; 
+}
+.yt {
+    padding-bottom: 4px;
+}
+
+footer  .center {
+    text-align: center;
+}
+
+footer .right {
+    text-align: right;
+    margin-right: 30px;
+}
+
+
+.google_play {
+    width: 100px;
+    height: auto; 
+    
+}
+
+.apple_store {
+    width: 90px; 
+    height: auto; 
+    padding-left: 10px;
+}
+
+
 .fondo {
     position: absolute; 
     top: 0;

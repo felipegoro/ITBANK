@@ -4,12 +4,12 @@ const usuarios = {
 };
 
 function validarInicioSesion(username, password) {
-    if (usuariosValidos.hasOwnProperty(username)) {
-        if (usuariosValidos[username] === password) {
+    if (usuarios.hasOwnProperty(username)) {
+        if (usuarios[username] === password) {
             return true; 
         }
     }
-    return false; 
+    
 }
 
 document.getElementById("loginForm").addEventListener("submit", function(event) {
@@ -20,6 +20,8 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 
     if (validarInicioSesion(username, password)) {
         window.location.href = "index.html";
+
+        console.log("funca");
     } else {
         alert("Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.");
         document.getElementById("username").value = "";

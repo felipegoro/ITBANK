@@ -32,17 +32,53 @@
                 </li>
             </ul>
         </nav>
+        <link rel="stylesheet" href="styles2.css">
+        <div class="user-info">
+            <span class="user-name">LAURA</span>
+            <img src="icono.jpg" alt="Avatar" class="avatar">
+        </div>
     </header>
     <main>
-        <div class="fondo"><img  scr="fondito"> </div>
-            <div clase="contendio">
-                <div clase="bienvenida">
+        <div class="container">
+        
 
-                  <h2>Bienvenido a BANK-ITO </h2>
-                  <p>Maneja tus cuentas, trasfierre tu dinero de forma segura, disponibilidad todos los dias, Justo desde aqui.</p>
-
+            <div class="account-info">
+                <div class="account-number">008-67894/2</div>
+                <div class="account-type">CAJA DE AHORROS EN PESOS</div>
+                <div class="balance">$ 750.000,00</div>
+            </div>
+    
+            <div class="services">
+                <div class="service">
+                    <span class="service-name">servicio-telecentro</span>
+                    <span class="service-amount">$ 12.575,99</span>
+                    <span class="due-date">Vence el 17/09</span>
+                    <button class="pay-button">Pagar</button>
                 </div>
-        <p> hola mundo</p>
+                <div class="service">
+                    <span class="service-name">SUBE</span>
+                    <button class="reload-button">cargar</button>
+                </div>
+            </div>
+    
+            <div class="shortcuts">
+                <button class="shortcut">Transferencias</button>
+                <button class="shortcut">Pago de servicios</button>
+                <button class="shortcut">Inversiones</button>
+                <button class="shortcut">Préstamos</button>
+            </div>
+    
+            <div class="recent-movements">
+                <h2>Últimos movimientos</h2>
+                <ul>
+                    <li>Compra con tarjeta de credito - Mercado Libre - 26 agosto 16:20hs</li>
+                    <li>Transferencia recibida - De Mateo Orellana - 21 agosto 10:45hs</li>
+                    <li>Constitución de plazo fijo UVA - 31 julio 08:00hs</li>
+                </ul>
+                <button class="view-all">Ver todos</button>
+            </div>
+    
+        
         <form id="interestForm">
             <label for="monto">Monto inicial:</label>
             <input type="text" id="monto" name="monto" placeholder="Ingrese el monto inicial" required>

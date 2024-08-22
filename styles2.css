@@ -1,0 +1,199 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    margin-right: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 20px;
+}
+
+.greeting {
+    font-size: 28px;
+    color: #007bff;
+}
+
+.account-info {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.account-number, .account-type {
+    font-size: 18px;
+}
+
+.balance {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.services {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.service {
+    background-color: #e6f2ff;
+    padding: 15px;
+    border-radius: 8px;
+    width: 48%;
+    text-align: center;
+}
+
+.service-name {
+    font-size: 18px;
+    display: block;
+}
+
+.service-amount {
+    font-size: 24px;
+    color: #007bff;
+    margin-top: 10px;
+    display: block;
+}
+
+.due-date {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.pay-button, .reload-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shortcuts {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.shortcut {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 5px;
+}
+
+.recent-movements {
+    margin-bottom: 20px;
+}
+
+.recent-movements h2 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.recent-movements ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recent-movements li {
+    background-color: #e6f2ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.view-all {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.exchange-rate {
+    margin-bottom: 20px;
+}
+
+.exchange-rate h2 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.rates {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rate {
+    background-color: #e6f2ff;
+    padding: 15px;
+    border-radius: 8px;
+    width: 48%;
+    text-align: center;
+}
+
+.amount {
+    font-size: 24px;
+    color: #007bff;
+    margin-top: 10px;
+    display: block;
+}
+
+.view-rates {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+}

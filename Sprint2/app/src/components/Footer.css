@@ -25,6 +25,11 @@ footer {
 
 .center {
     text-align: center;
+    
+}
+
+.center a {
+    margin-right: 10px;
 }
 
 .right {

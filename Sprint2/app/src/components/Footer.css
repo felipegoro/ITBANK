@@ -6,19 +6,19 @@ footer {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    
 }
 
 .left {
     text-align: left;
-    margin-left: 20px;
-    
+    margin-left: 2px;
 }
+
 .left img {
     width: 25px;  
     height: auto;
     margin-right: 5px; 
 }
+
 .yt {
     padding-bottom: 4px;
 }
@@ -32,11 +32,9 @@ footer {
     margin-right: 30px;
 }
 
-
 .google_play {
     width: 100px;
     height: auto; 
-    
 }
 
 .apple_store {
@@ -45,4 +43,8 @@ footer {
     padding-left: 10px;
 }
 
-
+.all{
+    margin-top: 200px;
+    width: 100%; 
+    margin: 10 auto; 
+}

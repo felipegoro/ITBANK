@@ -1,0 +1,36 @@
+.contenido {
+    position: relative; 
+    text-align: right;
+    z-index: 1; 
+    color: #fff;  
+    padding : 20px;
+    text-align: center; 
+}
+
+.bienvenida h1  {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 70px;             
+    font-weight: bold;          
+    color: #1877f2;              
+    letter-spacing: -0.5px;      
+    text-align: left         
+
+}
+
+.bienvenida p  {
+    text-align: left;
+    position: relative;
+    top: 475px;
+    left: 40px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0px;
+    color: #ffffff; 
+    background-color: #4f7dfc; 
+    padding: 15px 200px;        
+    border-radius: 10px;       
+    display: inline-block;    
+    font-size: 1.2em;         
+
+
+
+}

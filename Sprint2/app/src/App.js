@@ -39,8 +39,94 @@ function App() {
             <Footer />
           </>
         } />
+
+         <Route path="Personas" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="Empresas" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="BancaOnline" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="Empresas" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="Privacidad" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="Condiciones" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="Contacto" element={
+          <>
+
+            <Header />
+
+            <Footer />
+          </>
+        } />
+
+          <Route path="Contacto" element={
+          <>
+
+           <Header />
+
+           <Footer />
+            </>
+        } />
+
+          <Route path="Contacto" element={
+            <>
+
+              <Header />
+
+              <Footer />
+              </>
+        } />   
+
+  
+
       </Routes>
     </Router>
+
+    
   );
 }
 

@@ -17,9 +17,9 @@ function Footer() {
             </div>
 
             <div className="center">
-                <a href="pdp.html">Políticas de privacidad</a>
-                <a href="tc.html">Términos y condiciones</a>
-                <a href="ic.html">Información de contacto</a>
+                <a href="/Privacidad">Políticas de privacidad</a>
+                <a href="/Condiciones">Términos y condiciones</a>
+                <a href="/Contacto">Información de contacto</a>
                 <p>&copy; 2024 BANK-ITO. Todos los derechos reservados.</p>
             </div>
 

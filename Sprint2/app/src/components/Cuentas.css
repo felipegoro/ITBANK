@@ -1,0 +1,57 @@
+.cuentas-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.cuentas-title {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.cuentas-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.cuenta-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    margin: 20px 10px; /* Ajusta el margen vertical e horizontal */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.cuenta-card:hover {
+    transform: translateY(-5px);
+}
+
+.cuenta-card h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.cuenta-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.cuenta-button {
+    background-color: #00438b;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.cuenta-button:hover {
+    background-color: #072c5c;
+}

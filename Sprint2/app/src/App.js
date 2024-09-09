@@ -6,6 +6,8 @@ import Login from './components/Login';
 import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import Seguros from './components/Seguros';
+import { Cuentas } from './components/Cuentas';
 
 import Inversiones from './components/Inversiones';
 import TarjetasContainer from './components/Tarjetas';
@@ -113,25 +115,24 @@ function App() {
           <>
 
             <Header />
-
             <Footer />
           </>
         } />
 
-          <Route path="Contacto" element={
+          <Route path="Cuentas" element={
           <>
 
            <Header />
-
+           <Cuentas />
            <Footer />
             </>
         } />
 
-          <Route path="Contacto" element={
+          <Route path="Seguros" element={
             <>
 
               <Header />
-
+              <Seguros />
               <Footer />
               </>
         } />   

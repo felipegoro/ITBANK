@@ -16,7 +16,7 @@ function Header() {
                     <li className="dropdown">
                         <a href="#" className="dropbtn">Menu</a>
                         <div className="dropdown-content">
-                            <a href="/Tarjetas">Tarjetas</a>
+                            <a href="/TarjetasContainer">Tarjetas</a>
                             <a href="/Jubilados">Jubilados</a>
                             <a href="/Emprendedores">Emprendedores</a>
                             <a href="/Comercios">Comercios</a>

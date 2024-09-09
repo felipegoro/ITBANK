@@ -7,6 +7,12 @@ import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 import Home from './components/Home';
 
+import Inversiones from './components/Inversiones';
+import TarjetasContainer from './components/Tarjetas';
+
+import Privacidad from './components/Privacidad';
+import Condiciones from './components/Condiciones';
+import Contacto from './components/Contacto';
 
 
 function App() {
@@ -49,7 +55,7 @@ function App() {
           </>
         } />
 
-          <Route path="Empresas" element={
+          <Route path="/Empresas" element={
           <>
 
             <Header />
@@ -80,7 +86,7 @@ function App() {
           <>
 
             <Header />
-
+            <Privacidad />
             <Footer />
           </>
         } />
@@ -89,7 +95,16 @@ function App() {
           <>
 
             <Header />
+            <Condiciones />
+            <Footer />
+          </>
+        } />
 
+          <Route path="Contacto" element={
+          <>
+
+            <Header />
+            <Contacto />
             <Footer />
           </>
         } />
@@ -121,8 +136,23 @@ function App() {
               </>
         } />   
 
-  
+          <Route path="Inversiones" element={
+            <>
 
+              <Header />
+              <Inversiones />
+              <Footer />
+              </>
+        } />   
+
+          <Route path="TarjetasContainer" element={
+            <>
+
+              <Header />
+              <TarjetasContainer/>
+              <Footer />
+              </>
+        } />   
       </Routes>
     </Router>
 

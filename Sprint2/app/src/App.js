@@ -8,14 +8,12 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Seguros from './components/Seguros';
 import { Cuentas } from './components/Cuentas';
-
 import Inversiones from './components/Inversiones';
 import TarjetasContainer from './components/Tarjetas';
-
 import Privacidad from './components/Privacidad';
 import Condiciones from './components/Condiciones';
 import Contacto from './components/Contacto';
-
+import Confirmacion from './components/Confirmacion'; // Asegúrate de importar el componente
 
 function App() {
   return (
@@ -48,116 +46,95 @@ function App() {
           </>
         } />
 
-         <Route path="Personas" element={
+        <Route path="Personas" element={
           <>
-
             <Header />
-
             <Footer />
           </>
         } />
 
-          <Route path="/Empresas" element={
+        <Route path="Empresas" element={
           <>
-
             <Header />
-
             <Footer />
           </>
         } />
 
-          <Route path="BancaOnline" element={
+        <Route path="BancaOnline" element={
           <>
-
             <Header />
-
             <Footer />
           </>
         } />
 
-          <Route path="Empresas" element={
+        <Route path="Privacidad" element={
           <>
-
-            <Header />
-
-            <Footer />
-          </>
-        } />
-
-          <Route path="Privacidad" element={
-          <>
-
             <Header />
             <Privacidad />
             <Footer />
           </>
         } />
 
-          <Route path="Condiciones" element={
+        <Route path="Condiciones" element={
           <>
-
             <Header />
             <Condiciones />
             <Footer />
           </>
         } />
 
-          <Route path="Contacto" element={
+        <Route path="Contacto" element={
           <>
-
             <Header />
             <Contacto />
             <Footer />
           </>
         } />
 
-          <Route path="Contacto" element={
+        <Route path="Cuentas" element={
           <>
-
             <Header />
+            <Cuentas />
             <Footer />
           </>
         } />
 
-          <Route path="Cuentas" element={
+        <Route path="Seguros" element={
           <>
-
-           <Header />
-           <Cuentas />
-           <Footer />
-            </>
+            <Header />
+            <Seguros />
+            <Footer />
+          </>
         } />
 
-          <Route path="Seguros" element={
-            <>
+        <Route path="confirmacion" element={
+          <>
+            <Header />
+            <Confirmacion />
+            <Footer />
+          </>
+        } />
 
-              <Header />
-              <Seguros />
-              <Footer />
-              </>
-        } />   
+        <Route path="Inversiones" element={
+          <>
+            <Header />
+            <Inversiones />
+            <Footer />
+          </>
+        } />
 
-          <Route path="Inversiones" element={
-            <>
+        <Route path="TarjetasContainer" element={
+          <>
+            <Header />
+            <TarjetasContainer/>
+            <Footer />
+          </>
+        } />
 
-              <Header />
-              <Inversiones />
-              <Footer />
-              </>
-        } />   
-
-          <Route path="TarjetasContainer" element={
-            <>
-
-              <Header />
-              <TarjetasContainer/>
-              <Footer />
-              </>
-        } />   
+        
+       
       </Routes>
     </Router>
-
-    
   );
 }
 

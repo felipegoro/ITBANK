@@ -13,10 +13,13 @@ import TarjetasContainer from './components/Tarjetas';
 import Privacidad from './components/Privacidad';
 import Condiciones from './components/Condiciones';
 import Contacto from './components/Contacto';
-import Confirmacion from './components/Confirmacion'; // Asegúrate de importar el componente
+import Confirmacion from './components/Confirmacion'; 
+import Transferencias from './components/Transferencias';
+import { CuentasProvider } from './context/CuentasContext'; 
 
 function App() {
   return (
+    <CuentasProvider>
     <Router>
       <Routes>
         <Route path="/login" element={
@@ -131,10 +134,17 @@ function App() {
           </>
         } />
 
+        <Route path="Transferencias" element={
+          <>
+            <Header />
+            <Transferencias />
+            <Footer />
+          </>
+        } />
         
-       
       </Routes>
     </Router>
+    </CuentasProvider>
   );
 }
 

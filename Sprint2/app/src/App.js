@@ -14,6 +14,7 @@ import Privacidad from './components/Privacidad';
 import Condiciones from './components/Condiciones';
 import Contacto from './components/Contacto';
 import Confirmacion from './components/Confirmacion'; 
+import Operaciones from './components/Operaciones'; 
 import Transferencias from './components/Transferencias';
 import { CuentasProvider } from './context/CuentasContext'; 
 
@@ -114,6 +115,14 @@ function App() {
           <>
             <Header />
             <Confirmacion />
+            <Footer />
+          </>
+        } />
+
+        <Route path="Operaciones" element={
+          <>
+            <Header />
+            <Operaciones />
             <Footer />
           </>
         } />

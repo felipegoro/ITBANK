@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Asegúrate
+import React, { useState } from 'react';
 import './Tarjetas.css'; 
 
 function Tarjetas({ marca, numero, cuenta, limite, vencimiento }) {

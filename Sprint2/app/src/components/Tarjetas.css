@@ -32,6 +32,10 @@
     width: 300px; 
 }
 
+.Tarjetas:hover {
+    transform: translateY(-20px);
+  }
+
 .marca {
     font-size: 1.2em;
     text-align: right;
@@ -52,6 +56,12 @@
 button {
     font-size: 1.2em;
     background-color: #00438b;
+    color: #ffffff;  
+}
+
+button:hover {
+    font-size: 1.2em;
+    background-color: #0654a8;
     color: #ffffff;
 }
 

@@ -214,7 +214,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100vh; 
-    background-image: url('fondito.jpg'); 
+    /*background-image: url('fondito'); */
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 

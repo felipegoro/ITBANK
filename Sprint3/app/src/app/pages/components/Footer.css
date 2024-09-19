@@ -1,0 +1,55 @@
+footer {
+    background-color: #021d3b;
+    color: rgb(245, 247, 252);
+    padding: 10px 0;
+    margin-top: 252px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.left {
+    text-align: left;
+    margin-left: 2px;
+}
+
+.left img {
+    width: 25px;  
+    height: auto;
+    margin-right: 5px; 
+}
+
+.yt {
+    padding-bottom: 4px;
+}
+
+.center {
+    text-align: center;
+    
+}
+
+.center a {
+    margin-right: 10px;
+}
+
+.right {
+    text-align: right;
+    margin-right: 30px;
+}
+
+.google_play {
+    width: 100px;
+    height: auto; 
+}
+
+.apple_store {
+    width: 90px; 
+    height: auto; 
+    padding-left: 10px;
+}
+
+.all{
+    
+    width: 100%; 
+    margin: 10 auto; 
+}

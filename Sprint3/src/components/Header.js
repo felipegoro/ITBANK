@@ -1,35 +1,36 @@
 import React from 'react';
+import Link from 'next/link';
 import '../app/styles/Header.css';
 
 function Header() {
     return (
         <header className="header">
             <div className="logo">
-            <a href="/login"><h1>BANK-&nbsp;ITO</h1></a>
+                <Link href="/login"><h1>BANK-&nbsp;ITO</h1></Link>
             </div>
             <nav className="main-nav">
                 <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="/Personas">Personas</a></li>
-                    <li><a href="/Empresas">Empresas</a></li>
-                    <li><a href="/BancaOnline">Banca Online</a></li>
+                    <li><Link href="../home">Home</Link></li>
+                    <li><Link href="../Personas">Personas</Link></li>
+                    <li><Link href="../Empresas">Empresas</Link></li>
+                    <li><Link href="../BancaOnline">Banca Online</Link></li>
                     <li className="dropdown">
                         <a href="#" className="dropbtn">Menu</a>
                         <div className="dropdown-content">
-                            <a href="/TarjetasContainer">Tarjetas</a>
-                            <a href="/Jubilados">Jubilados</a>
-                            <a href="/Emprendedores">Emprendedores</a>
-                            <a href="/Comercios">Comercios</a>
-                            <a href="/Préstamos">Préstamos Online</a>
-                            <a href="/Inversiones">Inversiones</a>
-                            <a href="/Cuentas">Cuentas</a>
-                            <a href="/Seguros">Seguros</a>
+                            <Link href="../tarjetas">tarjetas</Link>
+                            {/* <Link href="../Jubilados">Jubilados</Link> */}
+                            {/* <Link href="../Emprendedores">Emprendedores</Link> */}
+                            {/* <Link href="../Comercios">Comercios</Link> */}
+                            <Link href="../Préstamos">Préstamos Online</Link>
+                            <Link href="../Inversiones">Inversiones</Link>
+                            <Link href="../Cuentas">Cuentas</Link>
+                            <Link href="../Seguros">Seguros</Link>
                         </div>
                     </li>
                 </ul>
             </nav>
         </header>
     );
-};
+}
 
 export default Header;

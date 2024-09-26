@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CuentasContext } from '../context/CuentasContext'; 
-import './Cuentas.css';
+import '../app/styles/Cuentas.css';
 
 export const Cuentas = () => {
   const { cuentas, toggleDetalles } = useContext(CuentasContext); 

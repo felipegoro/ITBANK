@@ -1,5 +1,5 @@
 import React from 'react';
-import './Inversiones.css'; 
+import '../app/styles/Inversiones.css'; 
 
 export const Inversiones = () => {
   return (

@@ -1,5 +1,5 @@
 
-import './styles/Transferencias.scss';
+import '../app/styles/Transferencias.scss';
 
 import React, { useContext, useState } from 'react';
 import { CuentasContext } from '../context/CuentasContext';

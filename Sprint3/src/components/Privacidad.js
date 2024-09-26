@@ -1,5 +1,5 @@
 import React from 'react';
-import './Privacidad.css'; 
+import '../app/styles/Privacidad.css'; 
 
 function Privacidad() {
   return (

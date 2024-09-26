@@ -1,5 +1,5 @@
 import React from 'react';
-import './Fondo.css';
+import '../app/styles/Fondo.css';
 
 function Fondo() {
     return (

@@ -1,13 +1,13 @@
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import TarjetasContainer from '../../components/Tarjetas';
+import Privacidad from '../../components/Privacidad';
 
-const T = () => (
+const Privacidadd = () => (
   <>
     <Header />
-    <TarjetasContainer />
+    <Privacidad />
     <Footer />
   </>
 );
 
-export default T;
+export default Privacidadd;

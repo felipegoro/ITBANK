@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import '../app/styles/Confirmacion.css';
 
@@ -7,13 +8,10 @@ const Confirmacion = () => {
       <h1>¡Contratación Exitosa!</h1>
       <p>El servicio ha sido contratado con éxito. Nos comunicaremos con usted en las próximas horas.</p>
       <a href="/seguros" className="confirmacion-button">Volver a Seguros</a>
-      
 
       <div className="confirmacion-tips">
         <h2>¿Qué hacer a continuación?</h2>
-        <p>
-          Gracias por contratar nuestro servicio. Aquí tienes algunos consejos para seguir:
-        </p>
+        <p>Gracias por contratar nuestro servicio. Aquí tienes algunos consejos para seguir:</p>
         <ul>
           <li>Revisa tu correo electrónico para confirmar la recepción de la contratación y los detalles del servicio.</li>
           <li>Si necesitas hacer algún cambio en tu contrato, contacta con nuestro servicio de atención al cliente.</li>

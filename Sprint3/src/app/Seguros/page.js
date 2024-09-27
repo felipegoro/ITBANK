@@ -1,8 +1,9 @@
+// src/app/Seguros/page.js
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Seguros from '../../components/Seguros';
 
-const Seguross = () => (
+const SegurosPage = () => (
   <>
     <Header />
     <Seguros />
@@ -10,4 +11,4 @@ const Seguross = () => (
   </>
 );
 
-export default Seguross;
+export default SegurosPage;

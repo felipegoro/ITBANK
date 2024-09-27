@@ -1,12 +1,13 @@
+"use client";
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import "../app/styles/Seguros.css"
+import { useRouter } from 'next/navigation'; 
+import "../app/styles/Seguros.css";
 
 const Seguros = () => {
-  const navigate = useNavigate(); 
+  const router = useRouter(); 
 
   const handleContratar = () => {
-    navigate('/confirmacion'); 
+    router.push('/confirmacion'); 
   };
 
   return (

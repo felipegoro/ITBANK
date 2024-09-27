@@ -2,7 +2,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Confirmacion from '../../components/Confirmacion';
 
-const Confirmacionn = () => (
+const ConfirmacionPage = () => (
   <>
     <Header />
     <Confirmacion />
@@ -10,4 +10,6 @@ const Confirmacionn = () => (
   </>
 );
 
-export default Confirmacionn;
+export default ConfirmacionPage;
+
+

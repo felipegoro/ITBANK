@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import '../app/styles/Header.css';
+import '../styles/Header.css';
 
 function Header() {
     return (
@@ -10,7 +10,7 @@ function Header() {
             </div>
             <nav className="main-nav">
                 <ul>
-                    <li><Link href="../home">Home</Link></li>
+                    <li><Link href="/">Home</Link></li>
                     <li><Link href="../Personas">Personas</Link></li>
                     <li><Link href="../Empresas">Empresas</Link></li>
                     <li><Link href="../BancaOnline">Banca Online</Link></li>

@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import '../app/styles/Confirmacion.css';
+import '../styles/Confirmacion.css';
 
 const Confirmacion = () => {
   return (

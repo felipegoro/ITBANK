@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import '../app/styles/Tarjetas.css'; 
+import '../styles/Tarjetas.css'; 
 
 function Tarjetas({ marca, numero, cuenta, limite, vencimiento }) {
   const [showNumber, setShowNumber] = useState(false);

@@ -1,7 +1,9 @@
 import React from 'react';
-import '../app/styles/Inversiones.css'; 
+import '../styles/Home.css'; 
 
-export const Inversiones = () => {
+
+
+export const Home = () => {
   return (
     <div>
       <main>
@@ -77,4 +79,4 @@ export const Inversiones = () => {
 };
 
 
-export default Inversiones;
+export default Home;

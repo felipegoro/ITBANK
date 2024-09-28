@@ -30,6 +30,9 @@ footer {
 
 .center a {
     margin-right: 10px;
+    text-decoration: none;
+    color: #4f7dfc;
+
 }
 
 .right {

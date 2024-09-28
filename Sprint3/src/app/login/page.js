@@ -1,12 +1,14 @@
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Login from '../../components/Login';
+import Login from '../components/Login';
+import LoginForm from '../components/LoginForm';
+import Fondo from '../components/Fondo';
+
+
 
 const Loginn = () => (
   <>
-    <Header />
     <Login />
-    <Footer />
+    <LoginForm />
+    <Fondo />
   </>
 );
 

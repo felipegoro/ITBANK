@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { useRouter } from 'next/navigation'; 
-import "../app/styles/Seguros.css";
+import "../styles/Seguros.css";
 
 const Seguros = () => {
   const router = useRouter(); 

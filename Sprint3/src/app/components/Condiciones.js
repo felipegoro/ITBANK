@@ -1,6 +1,6 @@
 import React from 'react';
-import './Condiciones.css';
-
+import '../styles/Condiciones.css';
+ 
 function Condiciones() {
   return (
     <div>

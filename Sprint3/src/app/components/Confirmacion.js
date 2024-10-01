@@ -3,11 +3,16 @@ import React from 'react';
 import '../styles/Confirmacion.css';
 
 const Confirmacion = () => {
+
+  const handleContratar = () => {
+    router.push('/Seguros'); 
+  };
+
   return (
     <div className="confirmacion-container">
       <h1>¡Contratación Exitosa!</h1>
       <p>El servicio ha sido contratado con éxito. Nos comunicaremos con usted en las próximas horas.</p>
-      <a href="/seguros" className="confirmacion-button">Volver a Seguros</a>
+      <a href="/Seguros" className="confirmacion-button" >Volver a Seguros</a>
 
       <div className="confirmacion-tips">
         <h2>¿Qué hacer a continuación?</h2>

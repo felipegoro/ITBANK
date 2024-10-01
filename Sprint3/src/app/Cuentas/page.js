@@ -1,9 +1,9 @@
-import Cuentas from '../components/Cuentas';
+import Confirmacion from '../components/Confirmacion';
 
-const Cuentass = () => (
+const ConfirmacionPage = () => (
   <>
-    <Cuentas />
+    <Confirmacion />
   </>
 );
 
-export default Cuentass;
+export default ConfirmacionPage;

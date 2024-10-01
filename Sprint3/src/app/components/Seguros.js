@@ -7,7 +7,7 @@ const Seguros = () => {
   const router = useRouter(); 
 
   const handleContratar = () => {
-    router.push('/confirmacion'); 
+    router.push('/Confirmacion'); 
   };
 
   return (

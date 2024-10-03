@@ -15,7 +15,7 @@ function Fondo() {
                     sizes="100vw"
                     style={{
                     objectFit: 'cover',
-                    }}
+                    }}  
                 />
             </div>
             

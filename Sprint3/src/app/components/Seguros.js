@@ -27,7 +27,7 @@ const Seguros = () => {
 
         <div className="seguro-card">
           <h2>Seguro de Salud</h2>
-          <p>Te cubre de algún accidente muy grave en tu salud o la de otra persona.</p>
+          <p>Te cubre de algún accidente muy grave en tu salud.</p>
           <button className='seguro-button' onClick={handleContratar}>Contratar</button>
         </div>
 

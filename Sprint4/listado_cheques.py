@@ -1,5 +1,7 @@
 import csv
-import time
+import os
+from datetime import datetime, timezone
+
 
 # Abrir el archivo CSV en modo lectura
 with open('cheques.csv', 'r') as f:
@@ -8,16 +10,34 @@ with open('cheques.csv', 'r') as f:
 
 fieldnames = csv_reader.fieldnames
 
+# Función para convertir fecha
+def convertir_fecha(fecha):
+    try:
+        fecha_int = int(fecha)
+        return datetime.fromtimestamp(fecha_int, timezone.utc).strftime('%Y-%m-%d')
+    except ValueError: 
+        return fecha
+
+for cheque in data:
+    cheque["FechaOrigen"] = convertir_fecha(cheque["FechaOrigen"])
+    cheque["FechaPago"] = convertir_fecha(cheque["FechaPago"])
+
 # Función para exportar cheques a CSV
 def exportar_a_csv(data, DNI):
-    timestamp = int(time.time())
-    output_csv = f"{DNI}_{timestamp}.csv"
-    
+    fecha_actual = datetime.now().strftime('%Y-%m-%d')
+    base_filename = f"{DNI}_{fecha_actual}"
+    output_csv = f"{base_filename}.csv"
+
+    counter = 1
+    while os.path.exists(output_csv):
+        output_csv = f"{base_filename}_{counter}.csv"
+        counter += 1
+
     with open(output_csv, "w") as f:
         csv_writer = csv.DictWriter(f, fieldnames=fieldnames)
         csv_writer.writeheader()
-        csv_writer.writerows(data)
-    
+        csv_writer.writerows(data)  
+
     print(f"Archivo exportado exitosamente: {output_csv}")
 
 # Función para filtrar cheques

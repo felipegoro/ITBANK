@@ -1,0 +1,2 @@
+NroCheque,CodigoBanco,CodigoSucursal,NumeroCuentaOrigen,NumeroCuentaDestino,Valor,FechaOrigen,FechaPago,DNI,Estado,TipoCheque
+3,8,155,11111111,22222222,3000.75,2021-09-08,2021-09-18,12345678,RECHAZADO,EMITIDO

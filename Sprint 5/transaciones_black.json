@@ -1,0 +1,35 @@
+{
+    "nombre": "Carlos",
+    "apellido": "Gonzalez",
+    "DNI": "19283746",
+    "tipo": "Black",
+    "transacciones": [
+      {
+        "estado": "ACEPTADA",
+        "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
+        "monto": 80000,
+        "cupoDiarioRestante": 20000,
+        "cuentaNumero": 301
+      },
+      {
+        "estado": "RECHAZADA",
+        "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
+        "monto": 120000,
+        "razonRechazo": "Excede el límite diario de $100.000",
+        "cuentaNumero": 301
+      },
+      {
+        "estado": "ACEPTADA",
+        "tipo": "TRANSFERENCIA",
+        "monto": 2000000,
+        "cuentaNumero": 302
+      },
+      {
+        "estado": "ACEPTADA",
+        "tipo": "COMPRA_DOLARES",
+        "monto": 5000,
+        "cuentaNumero": 303
+      }
+    ]
+  }
+  

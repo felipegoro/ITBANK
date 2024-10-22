@@ -1,6 +1,6 @@
-from Clien import Client
-from ProcesadorTPS import ProcesadorTPS
-from Report import Report
+from Class_bank.Client import Client
+from Class_bank.ProcesadorTPS import ProcesadorTPS
+from Class_bank.Report import Report
 import json
 
 def leer_json(ruta_archivo):

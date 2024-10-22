@@ -1,7 +1,7 @@
 import unittest
-from Validar import Validar
-from Client import Client
-from Transacion import Transacion
+from Class_bank.Validar import Validar
+from Class_bank.Client import Client
+from Class_bank.Transaction import Transacion
 
 class TestValidar(unittest.TestCase):
     def test_validar_classic(self):

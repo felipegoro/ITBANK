@@ -1,4 +1,4 @@
-from Transacion import Transacion
+from Transaction import Transacion
 from Validar import Validar
 
 class ProcesadorTPS:

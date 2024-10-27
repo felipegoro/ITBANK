@@ -1,0 +1,48 @@
+[
+    {
+        "numero": 100001,
+        "nombre": "Nicolas",
+        "apellido": "Gastón",
+        "DNI": "29494777",
+        "direccion": "Calle Falsa 123",
+        "transacciones": [
+            {
+                "estado": "ACEPTADA",
+                "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
+                "cuentaNumero": 190,
+                "monto": 1000,
+                "fecha": "10/10/2022 16:00:55"
+            },
+            {
+                "estado": "RECHAZADA",
+                "tipo": "ALTA_CHEQUERA",
+                "cuentaNumero": 190,
+                "monto": 9000,
+                "fecha": "10/10/2022 16:00:55"
+            }
+        ]
+    },
+    {
+        "numero": 100002,
+        "nombre": "María",
+        "apellido": "Lopez",
+        "DNI": "12345678",
+        "direccion": "Calle Verdadera 456",
+        "transacciones": [
+            {
+                "estado": "ACEPTADA",
+                "tipo": "COMPRAR_DOLAR",
+                "cuentaNumero": 191,
+                "monto": 500,
+                "fecha": "10/11/2022 14:30:00"
+            },
+            {
+                "estado": "RECHAZADA",
+                "tipo": "TRANSFERENCIA_RECIBIDA",
+                "cuentaNumero": 191,
+                "monto": 200,
+                "fecha": "10/11/2022 15:00:00"
+            }
+        ]
+    }
+]

@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Seguros from './components/Seguros';
 import { Cuentas } from './components/Cuentas';
 import Inversiones from './components/Inversiones';
-import TarjetasContainer from './components/Tarjetas';
+import Tarjetas from './components/Tarjetas';
 import Privacidad from './components/Privacidad';
 import Condiciones from './components/Condiciones';
 import Contacto from './components/Contacto';
@@ -17,6 +17,11 @@ import Confirmacion from './components/Confirmacion';
 import Operaciones from './components/Operaciones'; 
 import Transferencias from './components/Transferencias';
 import { CuentasProvider } from './context/CuentasContext'; 
+import Servicios from './components/Servicios';
+import HistorialServicios from './components/HistorialServicios';
+import ConfigurarcuentaServicios from './components/ConfigurarcuentaServicios';
+import FormulariofacturaServicios from './components/FormulariofacturaServicios';
+
 
 function App() {
   return (
@@ -135,10 +140,10 @@ function App() {
           </>
         } />
 
-        <Route path="TarjetasContainer" element={
+        <Route path="Tarjetas" element={
           <>
             <Header />
-            <TarjetasContainer/>
+            <Tarjetas/>
             <Footer />
           </>
         } />
@@ -151,6 +156,14 @@ function App() {
           </>
         } />
         
+        <Route path="Servicios" element={
+          <>
+            <Header />
+            <Servicios/>
+            <Footer />
+          </>
+        } /> 
+       
       </Routes>
     </Router>
     </CuentasProvider>

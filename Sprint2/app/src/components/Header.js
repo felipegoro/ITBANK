@@ -1,35 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BsPersonStanding } from 'react-icons/bs';
+import { IoBusiness, IoCardOutline } from 'react-icons/io5';
+import { TbOld } from 'react-icons/tb';
+import { GrMoney } from 'react-icons/gr';
+import { MdOutlineSecurity } from 'react-icons/md';
 
 function Header() {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [openSubmenu, setOpenSubmenu] = useState(null);
+
+    const toggleSubmenu = (menu) => {
+        setOpenSubmenu(openSubmenu === menu ? null : menu);
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
     return (
-        <header className="header">
-            <div className="logo">
-            <a href="/login"><h1>BANK-&nbsp;ITO</h1></a>
-            </div>
-            <nav className="main-nav">
-                <ul>
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="/Personas">Personas</a></li>
-                    <li><a href="/Empresas">Empresas</a></li>
-                    <li><a href="/BancaOnline">Banca Online</a></li>
-                    <li className="dropdown">
-                        <a href="#" className="dropbtn">Menu</a>
-                        <div className="dropdown-content">
-                            <a href="/TarjetasContainer">Tarjetas</a>
-                            <a href="/Jubilados">Jubilados</a>
-                            <a href="/Emprendedores">Emprendedores</a>
-                            <a href="/Comercios">Comercios</a>
-                            <a href="/Préstamos">Préstamos Online</a>
-                            <a href="/Inversiones">Inversiones</a>
-                            <a href="/Cuentas">Cuentas</a>
-                            <a href="/Seguros">Seguros</a>
-                        </div>
+        <div>
+            <header className="header-top">
+                <div className="desplegable">
+                    <a href="#" onClick={toggleSidebar}><GiHamburgerMenu/></a>
+                </div> 
+                <a className="logo" href="/login">
+                    <h1>BANK-&nbsp;ITO</h1>
+                </a>
+                <div className="ba">
+                    <a href="/home">Banca Online</a>
+                </div>
+            </header>
+
+            <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+                <h3>Menu</h3>
+                <ul className="menu">
+                    <li>
+                        <a href="/Seguros"><MdOutlineSecurity /> Seguros</a>
+                    </li>
+                    <li>
+                        <a href="/Jubilados"><TbOld />Jubilados</a>
+                    </li>
+                    <li>
+                        <a href="/Inversiones"><GrMoney /> Inversiones</a>
+                    </li>
+                    <li>
+                        <a href="/tarjetas"><IoCardOutline /> Tarjetas</a>
+                    </li>
+                    <li>
+                        <a href="/Cuentas"><BsPersonStanding /> Personas</a>
+                    </li>
+                    <li>
+                        <a href="/Empresas"><IoBusiness /> Empresas</a>
                     </li>
                 </ul>
-            </nav>
-        </header>
+            </div>
+        </div>
     );
-};
+}
 
 export default Header;

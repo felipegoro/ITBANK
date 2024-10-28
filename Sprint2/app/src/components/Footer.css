@@ -1,11 +1,14 @@
 footer {
-    background-color: #021d3b;
-    color: rgb(245, 247, 252);
     padding: 10px 0;
-    margin-top: 252px;
+    margin-top: auto;
     display: flex;
     justify-content: space-between; 
     align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+   
 }
 
 .left {
@@ -30,9 +33,13 @@ footer {
 
 .center a {
     margin-right: 10px;
+<<<<<<< Updated upstream
     text-decoration: none;
     color: #4f7dfc;
 
+=======
+    color: white;
+>>>>>>> Stashed changes
 }
 
 .right {

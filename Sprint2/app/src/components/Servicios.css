@@ -1,0 +1,85 @@
+.Servicios {
+    font-family: Arial, sans-serif;
+  }
+  
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    
+  }
+  
+  .tabs button {
+    background: none;
+    border:none;
+    color: rgb(255, 255, 255);
+    background-color: #00376e;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+
+
+
+    
+  }
+  
+  .button {
+    background-color: #00376e;
+    color: rgb(249, 249, 249);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+  }
+  
+  .empresas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .empresas button {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .a{
+    background-color: #00376e;
+    color: rgb(249, 249, 249);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+
+
+  }

@@ -30,9 +30,13 @@ footer {
 
 .center a {
     margin-right: 10px;
+<<<<<<< Updated upstream
     text-decoration: none;
     color: #4f7dfc;
 
+=======
+    color: white;
+>>>>>>> Stashed changes
 }
 
 .right {

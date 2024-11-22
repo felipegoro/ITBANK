@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Detalles de la Cuenta</h1>
+
+<p><strong>Cliente:</strong> {{ account.customer }}</p>
+<p><strong>Tipo:</strong> {{ account.account_type }}</p>
+<p><strong>Saldo:</strong> ${{ account.balance }}</p>
+
+<a href="{% url 'cuentas:list' %}" class="goback">Volver a la lista</a>
+{% endblock %}

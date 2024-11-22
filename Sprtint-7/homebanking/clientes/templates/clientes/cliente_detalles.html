@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="details-container">
+    <h1>{{ customer.nombre }} {{ customer.apellido }}</h1>
+    <p><strong>DNI:</strong> {{ customer.numero_identificacion }}</p>
+    <p><strong>Fecha de nacimiento:</strong> {{ customer.fecha_nacimiento }}</p>
+    <p><strong>Direcciones:</strong></p>
+    <ul>
+        {% for address in customer.direcciones.all %}
+        <li>{{ address }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Tarjetas asociadas</h2>
+    <ul>
+        {% for tarjeta in customer.tarjetas.all %}
+        <li>
+            {{ tarjeta }} 
+            <a href="{% url 'clientes:delete_card' tarjeta.id %}" class="delete-button">Eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'clientes:add_card' customer.id %}" class="button">Agregar tarjeta</a>
+</div>
+
+<a href="{% url 'clientes:home' %}" class="goback">Volver</a>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Préstamo</title>
+    {% load static %}
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      p {
+        margin: 10px 0;
+      }
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .back-button {
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #6c757d;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .back-button:hover {
+        background-color: #5a6268;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detalle del Préstamo</h1>
+        <p>Valor: {{ prestamo.valor }}</p>
+        <p>Tipo: {{ prestamo.tipo.nombre }}</p>
+        <p>Fecha: {{ prestamo.fecha }}</p>
+        <p>Cliente: {{ prestamo.cliente.nombre }} {{ prestamo.cliente.apellido }}</p>
+        <form method="post" action="{% url 'prestamos:pagar_prestamo' prestamo.id %}">
+            {% csrf_token %}
+            <button type="submit">Pagar</button>
+        </form>
+        <a class="back-button" href="{% url 'prestamos:lista_prestamos' prestamo.cliente.id %}">Volver a la lista de préstamos</a>
+    </div>
+</body>
+</html>

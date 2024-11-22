@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Lista de Clientes</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.nombre }}</td>
+            <td>{{ customer.apellido }}</td>
+            <td>{{ customer.numero_identificacion }}</td>
+            <td>
+                <a href="{% url 'clientes:detail' customer.id %}">Ver detalles</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'clientes:new_customer' %}" class="button">Registrar nuevo cliente</a>
+{% endblock %}

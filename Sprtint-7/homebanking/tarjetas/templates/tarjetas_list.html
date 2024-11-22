@@ -1,0 +1,31 @@
+<!-- templates/tarjetas/tarjetas_list.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Tarjetas</title>
+</head>
+<body>
+    <h1>Listado de Tarjetas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Fecha Expiración</th>
+                <th>Tipo</th>
+                <th>Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tarjeta in tarjetas %}
+                <tr>
+                    <td>{{ tarjeta.numero }}</td>
+                    <td>{{ tarjeta.fecha_expiracion }}</td>
+                    <td>{{ tarjeta.tipo }}</td>
+                    <td>{{ tarjeta.cliente }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

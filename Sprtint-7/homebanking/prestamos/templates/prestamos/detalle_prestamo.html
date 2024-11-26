@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Préstamo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'prestamos/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalle del Préstamo</h1>
+        <p>Valor: {{ prestamo.valor }}</p>
+        <p>Tipo: {{ prestamo.tipo }}</p>
+        <p>Fecha: {{ prestamo.fecha }}</p>
+        <p>Cliente: {{ prestamo.cliente }}</p>
+        <form method="post" action="{% url 'prestamos:pagar_prestamo' prestamo.id %}">
+            {% csrf_token %}
+            <button type="submit">Pagar</button>
+        </form>
+        <a class="back-button" href="{% url 'prestamos:lista_prestamos' %}">Volver a la lista de préstamos</a>
+    </div>
+</body>
+</html>

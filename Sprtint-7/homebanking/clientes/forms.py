@@ -1,20 +1,13 @@
 from django import forms
-from .models import Cliente
-from tarjetas.models import Tarjeta
+from .models import Cliente, TipoCliente
 
-class CustomerForm(forms.ModelForm):
+class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ['nombre', 'apellido', 'numero_identificacion', 'fecha_nacimiento', 'categoria', 'direcciones']
-        widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}),
-        }
+        fields = ['nombre', 'apellido', 'dni', 'direccion', 'tipo', 'sucursal']
 
-class CardForm(forms.ModelForm):
-    class Meta:
-        model = Tarjeta
-        fields = ['numero', 'fecha_expiracion', 'fecha_otorgamiento', 'cvv', 'tipo', 'marca']
-        widgets = {
-            'fecha_expiracion': forms.DateInput(attrs={'type': 'date'}),
-            'fecha_otorgamiento': forms.DateInput(attrs={'type': 'date'}),
-        }
+class TarjetaForm(forms.Form):
+    numero = forms.CharField(max_length=16)
+    cvv = forms.CharField(max_length=3)
+    fecha_otorgamiento = forms.DateField()
+    fecha_expiracion = forms.DateField()

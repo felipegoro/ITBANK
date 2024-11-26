@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagar Préstamo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'prestamos/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Pagar Préstamo</h1>
+        <p>¿Estás seguro de que deseas saldar el préstamo de {{ prestamo.valor }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Pagar</button>
+        </form>
+        <p><a class="back-button" href="{% url 'prestamos:lista_prestamos' %}">Volver a la lista de préstamos</a></p>
+    </div>
+</body>
+</html>

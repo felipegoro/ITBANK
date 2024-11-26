@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Crear Empleado</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'empleados/styles.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Crear Nuevo Empleado</h1>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Guardar</button>
+      </form>
+      <p><a class="back-button" href="{% url 'empleados:lista_empleados' %}">Volver a la lista de empleados</a></p>
+    </div>
+  </body>
+</html>

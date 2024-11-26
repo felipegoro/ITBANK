@@ -1,38 +1,42 @@
 from django.db import models
 
-class Direccion(models.Model):  
-    calle = models.CharField(max_length=100)
-    numero = models.CharField(max_length=50)
-    ciudad = models.CharField(max_length=100)
-    estado = models.CharField(max_length=100)
-    codigo_postal = models.CharField(max_length=20)
+class Sucursal(models.Model):
+    nombre = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=200)
+    numero = models.IntegerField(unique=True, null=True, blank=True)  
+    
+    
 
     def __str__(self):
-        return f'{self.calle}, {self.ciudad}, {self.estado}, {self.codigo_postal}'
+        return f"{self.nombre} ({self.numero})"
 
-
-class TipoCliente(models.Model): 
-    nombre_tipo = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nombre_tipo
-
-
-class Sucursal(models.Model):  
-    nombre_sucursal = models.CharField(max_length=100)
-    ubicacion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+class TipoCliente(models.Model):
+    CATEGORIAS = [
+        ('BLACK', 'Black'),
+        ('GOLD', 'Gold'),
+        ('CLASSIC', 'Classic'),
+    ]
+    categoria = models.CharField(max_length=7, choices=CATEGORIAS, default='CLASSIC')
+    limite_prestamo = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f'{self.nombre_sucursal}, {self.ubicacion}'
+        return self.categoria
 
-
-class Cliente(models.Model):  
+class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    numero_identificacion = models.CharField(max_length=15)
-    fecha_nacimiento = models.DateField()
-    direcciones = models.ManyToManyField(Direccion)  
-    categoria = models.ForeignKey(TipoCliente, on_delete=models.CASCADE)
+    dni = models.CharField(max_length=10, unique=True)
+    direccion = models.CharField(max_length=200, null=True, blank=True) 
+    tipo = models.ForeignKey(TipoCliente, on_delete=models.CASCADE)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.nombre} {self.apellido} ({self.numero_identificacion})'
+        return f"{self.apellido}, {self.nombre}"
+
+    @property
+    def categoria(self):
+        return self.tipo.categoria
+
+    @property
+    def limite_prestamo(self):
+        return self.tipo.limite_prestamo

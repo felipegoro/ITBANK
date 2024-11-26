@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Editar Empleado</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'empleados/styles.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Editar Empleado</h1>
+      <h1>Editar al empleado "{{ empleado.nombre }} {{ empleado.apellido }}"</h1>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button class="button" type="submit">Actualizar</button>
+      </form>
+    </div>
+    <p><a class="goback" href="{% url 'empleados:lista_empleados' %}">Volver a la lista de empleados</a></p>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+/* Estilos base */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  margin: 0;
+  padding: 30px;
+  color: #e6e6e6;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilos de tabla */
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: 25px;
+  background: transparent;
+}
+
+th {
+  background: linear-gradient(45deg, #4b3f72 0%, #8f3985 100%);
+  color: white;
+  padding: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  color: #e6e6e6;
+}
+
+tr[data-href] {
+  cursor: pointer;
+}
+
+tr:hover td {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+/* Estilos de botones en actions-center */
+.actions-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.actions-center a {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  min-width: 150px;
+  text-align: center;
+  display: inline-block;
+}
+
+.actions-center .button {
+  background: linear-gradient(45deg, #4b3f72 0%, #8f3985 100%);
+  box-shadow: 0 4px 15px rgba(75, 63, 114, 0.3);
+}
+
+.actions-center .switch-button {
+  background: linear-gradient(45deg, #3f72af 0%, #5b8dd4 100%);
+  box-shadow: 0 4px 15px rgba(63, 114, 175, 0.3);
+}
+
+.actions-center .logoutbutton {
+  background: linear-gradient(45deg, #ff6b6b 0%, #ff8e8e 100%);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.actions-center a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos de categorías */
+/* Estilos de categorías */
+.categoria-classic { color: #ffffff; font-weight: bold; }
+.categoria-gold { color: #ffffff; font-weight: bold; }
+.categoria-black { color: #ffffff; font-weight: bold; }
+
+.actions-center .help-button {
+  background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.actions-center .help-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+
+/* Estilos para la página de ayuda */
+.help-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 2rem 0;
+}
+
+.help-section h2 {
+  color: #fff;
+  margin-bottom: 2rem;
+  font-size: 1.8em;
+}
+
+.faq-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.faq-item h3 {
+  color: #2ecc71;
+  margin-bottom: 1rem;
+}
+
+.faq-item p, .faq-item ul {
+  color: #e6e6e6;
+  line-height: 1.6;
+}
+
+.faq-item ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.faq-item li {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
+}
+
+.help-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.help-actions .goback {
+  background: linear-gradient(45deg, #4b3f72 0%, #8f3985 100%);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 500;
+  min-width: 200px;
+  text-align: center;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(75, 63, 114, 0.3);
+}
+
+.help-actions .goback:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(75, 63, 114, 0.4);
+  background: linear-gradient(45deg, #5c4d89 0%, #a0419c 100%);
+}

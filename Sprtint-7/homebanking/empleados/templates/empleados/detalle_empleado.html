@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detalle de Empleado</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'empleados/styles.css' %}">
+  </head>
+  <body>
+    <div class="client-details">
+      <h1>Detalle del Empleado</h1>
+      <p><strong>Nombre:</strong> {{ empleado.nombre }}</p>
+      <p><strong>Apellido:</strong> {{ empleado.apellido }}</p>
+      <p><strong>DNI:</strong> {{ empleado.dni }}</p>
+      <p><strong>Fecha de Contratación:</strong> {{ empleado.fecha_contratacion }}</p>
+      <p><a class="goback" href="{% url 'empleados:lista_empleados' %}">Volver a la lista de empleados</a></p>
+    </div>
+  </body>
+</html>

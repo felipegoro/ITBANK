@@ -1,13 +1,12 @@
-# empleados/models.py
-
 from django.db import models
 from clientes.models import Sucursal
 
-class Trabajador(models.Model):
-    nombre_completo = models.CharField(max_length=200)
-    identificacion = models.CharField(max_length=12, unique=True)
-    fecha_ingreso = models.DateField()
-    oficina = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
+class Empleado(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    dni = models.CharField(max_length=10, unique=True)
+    fecha_contratacion = models.DateField()
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.nombre_completo} - {self.identificacion} - {self.fecha_ingreso} - {self.oficina}'
+        return f"{self.apellido}, {self.nombre}"

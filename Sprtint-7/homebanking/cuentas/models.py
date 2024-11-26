@@ -1,18 +1,16 @@
 from django.db import models
 from clientes.models import Cliente
 
+class TipoCuenta(models.Model): ## Entidad Tipo de Cuenta.
+    nombre = models.CharField(max_length=100)
+    ##Recordar solo 2 tipos, 1 crédito y 2 débito.
+    def __str__(self):
+        return f'{self.nombre} ' 
 
-class AccountType(models.Model):  
-    type_name = models.CharField(max_length=50)  
+class Cuenta(models.Model): ## Entidad Cuenta.
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE) 
+    sueldo = models.DecimalField(max_digits=10, decimal_places=2) 
+    tipo = models.ForeignKey(TipoCuenta, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.type_name
-
-
-class Account(models.Model):  
-    customer = models.ForeignKey(Cliente, on_delete=models.CASCADE)  
-    balance = models.DecimalField(max_digits=12, decimal_places=2)  
-    account_type = models.ForeignKey(AccountType, on_delete=models.CASCADE)  
-
-    def __str__(self):
-        return f'{self.customer} | Saldo: ${self.balance} | {self.account_type}'
+        return f'{self.cliente} - {self.sueldo} - {self.tipo}'

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Bancario - Gestión de Cuentas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'clientes/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Panel de Gestión de Cuentas</h1>
+        {% if clientes %}
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>CATEGORÍA</th>
+                        <th>DNI</th>
+                        <th>CLIENTE</th>
+                        <th>DIRECCIÓN</th>
+                        <th>LÍMITE PRÉSTAMO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr data-href="{% url 'clientes:detalle' cliente.id %}">
+                        <td class="categoria-{{ cliente.categoria|lower }}">{{ cliente.categoria }}</td>
+                        <td>{{ cliente.dni }}</td>
+                        <td>{{ cliente.apellido }}, {{ cliente.nombre }}</td>
+                        <td>{{ cliente.direccion }}</td>
+                        <td class="limite-prestamo">${{ cliente.limite_prestamo|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-data">
+            <p>No se encontraron cuentas en el sistema</p>
+            <small>Utilice el botón "Nueva Cuenta" para comenzar</small>
+        </div>
+        {% endif %}
+        
+        <div class="actions-center">
+          <a href="{% url 'clientes:nuevo_cliente' %}" class="button">Cuenta Nueva</a>
+          <a href="{% url 'empleados:lista_empleados' %}" class="switch-button">Empleados</a>
+          <a href="{% url 'clientes:ayuda' %}" class="help-button">Ayuda</a>
+          <a href="{% url 'login:logout' %}" class="logoutbutton">Cerrar Sesión</a>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("tr[data-href]").forEach(row => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.getAttribute("data-href");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Empleados</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'empleados/styles.css' %}">
+  </head>
+  <body>
+    <h1>Lista de Empleados</h1>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+        <th>Fecha de Contratación</th>
+        <th>Acciones</th>
+      </tr>
+      {% for empleado in empleados %}
+      <tr>
+        <td>{{ empleado.id }}</td>
+        <td>{{ empleado.nombre }}</td>
+        <td>{{ empleado.apellido }}</td>
+        <td>{{ empleado.dni }}</td>
+        <td>{{ empleado.fecha_contratacion }}</td>
+        <td>
+          <a href="{% url 'empleados:detalle_empleado' empleado.id %}">Ver Detalle</a> |
+          <a href="{% url 'empleados:editar_empleado' empleado.id %}">Editar</a> |
+          <a href="{% url 'empleados:eliminar_empleado' empleado.id %}">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a class="button" href="{% url 'empleados:crear_empleado' %}">Agregar Nuevo Empleado</a>
+    <a class="switch-button" href="{% url 'clientes:index' %}">Ir a menú clientes</a>
+    <a class="logoutbutton" href="{% url 'login:logout' %}">Cerrar sesión</a>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda - Sistema Bancario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'clientes/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Centro de Ayuda</h1>
+        
+        <div class="help-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <div class="faq-item">
+                <h3>¿Cómo crear una nueva cuenta?</h3>
+                <p>Para crear una nueva cuenta, haga clic en el botón "Cuenta Nueva" en la página principal. Complete el formulario con los datos del cliente y envíelo.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>¿Qué significan las diferentes categorías?</h3>
+                <ul>
+                    <li><strong>BLACK:</strong> Cuenta premium con límite de préstamo de $500,000</li>
+                    <li><strong>GOLD:</strong> Cuenta intermedia con límite de préstamo de $300,000</li>
+                    <li><strong>CLASSIC:</strong> Cuenta básica con límite de préstamo de $100,000</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>¿Cómo gestionar las tarjetas?</h3>
+                <p>Puede gestionar las tarjetas haciendo clic en cualquier cliente de la lista. En la página de detalles del cliente, encontrará las opciones para agregar o eliminar tarjetas.</p>
+            </div>
+        </div>
+
+        <div class="help-actions">
+            <a href="{% url 'clientes:index' %}" class="goback">Volver al Panel Principal</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Préstamos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'prestamos/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Préstamos de {{ cliente.nombre }} {{ cliente.apellido }}</h1>
+        <ul>
+            {% for prestamo in prestamos %}
+                <li><a href="{% url 'prestamos:detalle_prestamo' prestamo.id %}">{{ prestamo }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <p><a class="back-button" href="{% url 'clientes:detalle' cliente.id %}">Volver a detalles del cliente</a>
+            <a class="button" href="{% url 'prestamos:crear_prestamo' cliente.id %}">Agregar préstamo</a>
+        </div>
+    </div>
+</body>
+</html>

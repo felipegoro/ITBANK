@@ -1,18 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <title>Register</title>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/styles.css' %}">
 </head>
 <body>
-<div class="container">
-    <h1>Registrarse</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrarse</button>
-    </form>
-    <a href="{% url 'login:login' %}">Volver al Login</a>
-</div>
+    <div class="container">
+        <h1>Registro</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password1">Password:</label>
+                <input type="password" name="password1" id="password1" required>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" name="password2" id="password2" required>
+            </div>
+            <button type="submit">Registrarse</button>
+        </form>
+        <a href="{% url 'login:login' %}" class="register-link">Volver al Login</a>
+    </div>
 </body>
 </html>

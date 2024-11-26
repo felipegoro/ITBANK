@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Cliente - Sistema Bancario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'clientes/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="detail-header">
+            <h1>Información del Cliente</h1>
+            <span class="categoria-badge {{ cliente.categoria|lower }}">
+                {{ cliente.categoria }}
+            </span>
+        </div>
+
+        <div class="detail-info">
+            <p><strong>Nombre:</strong> {{ cliente.nombre }} {{ cliente.apellido }}</p>
+            <p><strong>DNI:</strong> {{ cliente.dni }}</p>
+            <p><strong>Límite de Préstamo:</strong> ${{ cliente.limite_prestamo }}</p>
+        </div>
+
+        <div class="actions-grid">
+            <a href="{% url 'prestamos:lista_prestamos' cliente.id %}" class="action-card prestamos">
+                <h3>Préstamos</h3>
+                <p>Gestionar préstamos del cliente</p>
+            </a>
+            <a href="{% url 'clientes:nueva_tarjeta' cliente.id %}" class="action-card tarjetas">
+                <h3>Tarjetas</h3>
+                <p>Administrar tarjetas</p>
+            </a>
+        </div>
+
+        <div class="navigation-buttons">
+            <a href="{% url 'clientes:index' %}" class="nav-button back">Volver al Listado</a>
+        </div>
+    </div>
+</body>
+</html>

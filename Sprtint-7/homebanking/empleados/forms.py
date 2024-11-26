@@ -1,7 +1,8 @@
+# forms.py
 from django import forms
-from .models import Trabajador
+from .models import Empleado
 
-class TrabajadorForm(forms.ModelForm): 
+class EmpleadoForm(forms.ModelForm):
     class Meta:
-        model = Trabajador
-        fields = ['nombre_completo', 'identificacion', 'fecha_ingreso', 'oficina']
+        model = Empleado
+        fields = ['nombre', 'apellido', 'dni', 'fecha_contratacion', 'sucursal']

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Préstamo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'prestamos/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crear Nuevo Préstamo</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="cliente">Cliente:</label>
+                <p><strong>{{ cliente.nombre }} </strong></p>
+                <input type="hidden" name="cliente" value="{{ cliente.id }}">
+            </div>
+
+            <div>
+                <label for="tipo_cliente">Tipo de Préstamo:</label>
+                <select name="tipo_cliente" id="tipo_cliente">
+                    {% for tipo in tipos_prestamo %}
+                        <option value="{{ tipo.id }}">{{ tipo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" id="fecha" required>
+            </div>
+
+            <div>
+                <label for="valor">Valor del Préstamo:</label>
+                <input type="number" name="valor" id="valor" required max="{{ disponible }}" step="0.01">
+                <div class="limites-info">
+                    <small>Límite máximo total: ${{ limite_prestamo }}</small>
+                    <small>Préstamos actuales: ${{ total_prestamos }}</small>
+                    <small>Disponible para préstamos: ${{ disponible }}</small>
+                </div>
+            </div>
+
+            <button type="submit">Guardar</button>
+        </form>
+        <a href="{% url 'clientes:index' %}" class="back-button">Volver a la Lista</a>
+    </div>
+</body>
+</html>

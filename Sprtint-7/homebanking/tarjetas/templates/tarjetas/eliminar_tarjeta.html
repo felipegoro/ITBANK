@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Tarjeta - Sistema Bancario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'clientes/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>Eliminar Tarjeta</h1>
+        </div>
+
+        <div class="confirmation-container">
+            <p>¿Está seguro que desea eliminar la tarjeta?</p>
+            <p><strong>Número:</strong> •••• •••• •••• {{ tarjeta.numero|slice:"-4:" }}</p>
+            <p><strong>Tipo:</strong> {{ tarjeta.tipo }}</p>
+            <p><strong>Marca:</strong> {{ tarjeta.marca }}</p>
+
+            <form method="post" class="delete-form">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <button type="submit" class="delete-button">
+                        Eliminar Tarjeta
+                    </button>
+                    <a href="{% url 'clientes:detalle' tarjeta.cliente.id %}" class="cancel-button">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

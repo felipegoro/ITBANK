@@ -32,6 +32,33 @@
                 </div>
             </div>
 
+            <!-- Nueva sección de tarjetas -->
+            <div class="cards-section">
+                <h2>Tarjetas Emitidas</h2>
+                {% if cliente.tarjetas.all %}
+                    <div class="cards-grid">
+                        {% for tarjeta in cliente.tarjetas.all %}
+                            <div class="card-item">
+                                <div class="card-header">
+                                    <span class="card-type">{{ tarjeta.tipo }}</span>
+                                    <span class="card-brand">{{ tarjeta.marca }}</span>
+                                </div>
+                                <div class="card-number">•••• •••• •••• {{ tarjeta.numero|slice:"-4:" }}</div>
+                                <div class="card-details">
+                                    <div class="card-exp">Vence: {{ tarjeta.fecha_expiracion|date:"m/Y" }}</div>
+                                    <div class="card-actions">
+                                        <a href="{% url 'tarjetas:editar_tarjeta' tarjeta.id %}" class="edit-button">Editar</a>
+                                        <a href="{% url 'clientes:eliminar_tarjeta' tarjeta.id %}" class="delete-button">Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-cards">No hay tarjetas emitidas</p>
+                {% endif %}
+            </div>
+
             <div class="actions-grid">
                 <a href="{% url 'prestamos:lista_prestamos' cliente.id %}" class="action-card prestamos">
                     <div class="card-icon">💰</div>
@@ -43,8 +70,8 @@
                 <a href="{% url 'clientes:nueva_tarjeta' cliente.id %}" class="action-card tarjetas">
                     <div class="card-icon">💳</div>
                     <div class="card-content">
-                        <h3>Tarjetas</h3>
-                        <p>Administrar tarjetas</p>
+                        <h3>Nueva Tarjeta</h3>
+                        <p>Emitir nueva tarjeta</p>
                     </div>
                 </a>
             </div>

@@ -19,11 +19,11 @@ def crear_prestamo(request, cliente_id):
         tipo_prestamo = TipoPrestamo.objects.get(id=tipo_prestamo_id)
         valor_solicitado = float(request.POST['valor'])
 
-        # Obtener la suma total de préstamos actuales del cliente
+        
         prestamos_actuales = Prestamo.objects.filter(cliente=cliente)
         total_prestamos = sum(float(prestamo.valor) for prestamo in prestamos_actuales)
         
-        # Verificar si el nuevo préstamo excede el límite
+        
         if total_prestamos + valor_solicitado <= float(cliente.limite_prestamo):
             valor = valor_solicitado
         else:

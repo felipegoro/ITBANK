@@ -3,9 +3,11 @@ from django.db.models import Case, When, Value, IntegerField
 from django.views import generic
 from .models import Cliente
 from tarjetas.models import Tarjeta
-from .forms import ClienteForm, TarjetaForm
+from .forms import ClienteForm
+from tarjetas.forms import TarjetaForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
 
 @method_decorator(login_required, name='dispatch')
 class IndexView(generic.ListView):
@@ -26,7 +28,7 @@ class IndexView(generic.ListView):
     )
 
 @login_required
-def alta(request):
+def nuevo_cliente(request):
     if request.method == "POST":
         form = ClienteForm(request.POST)
         if form.is_valid():
@@ -47,21 +49,21 @@ def eliminar_tarjeta(request, tarjeta_id):
     tarjeta = get_object_or_404(Tarjeta, id=tarjeta_id)
     cliente_id = tarjeta.cliente.id
     tarjeta.delete()
-    return redirect('clientes:detalle', pk=cliente_id)  # Corregido de 'destalle' a 'detalle'
+    return redirect('clientes:detalle', pk=cliente_id)  
 
 @login_required
-def alta_tarjeta(request, pk):
+def nueva_tarjeta(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == "POST":
         form = TarjetaForm(request.POST)
         if form.is_valid():
             tarjeta = form.save(commit=False)
-            tarjeta.cliente = cliente 
+            tarjeta.cliente = cliente
             tarjeta.save()
             return redirect('clientes:detalle', pk=cliente.id)
     else:
         form = TarjetaForm()
-    return render(request, 'clientes/nueva_tarjeta.html', {'form': form, 'cliente': cliente}) 
+    return render(request, 'clientes/nueva_tarjeta.html', {'form': form, 'cliente': cliente})
 
 @login_required
 def ayuda(request):

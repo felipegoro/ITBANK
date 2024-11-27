@@ -1,8 +1,8 @@
-# empleados/urls.py
 from django.urls import path
 from .views import EmpleadoListView, EmpleadoCreateView, EmpleadoUpdateView, EmpleadoDetailView, EmpleadoDeleteView
 
 app_name = 'empleados'
+
 urlpatterns = [
     path('', EmpleadoListView.as_view(), name='lista_empleados'),
     path('crear/', EmpleadoCreateView.as_view(), name='crear_empleado'),

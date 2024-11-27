@@ -1,11 +1,10 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estilos del body */
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -16,7 +15,7 @@ body {
   padding: 20px;
 }
 
-/* Contenedor principal */
+
 .container {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -27,7 +26,7 @@ body {
   max-width: 450px;
 }
 
-/* Títulos */
+
 h1 {
   color: #fff;
   text-align: center;
@@ -36,7 +35,7 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Formularios */
+
 .form-group {
   margin-bottom: 20px;
 }
@@ -66,7 +65,7 @@ input:focus {
   box-shadow: 0 0 15px rgba(75, 63, 114, 0.3);
 }
 
-/* Mensajes de error */
+
 .messages {
   margin-bottom: 20px;
 }
@@ -80,7 +79,7 @@ input:focus {
   text-align: center;
 }
 
-/* Botón de envío */
+
 button[type="submit"] {
   width: 100%;
   padding: 15px;
@@ -100,7 +99,7 @@ button[type="submit"]:hover {
   box-shadow: 0 6px 20px rgba(75, 63, 114, 0.4);
 }
 
-/* Estilos para los enlaces de registro y volver */
+
 .register-link {
   display: block;
   text-align: center;

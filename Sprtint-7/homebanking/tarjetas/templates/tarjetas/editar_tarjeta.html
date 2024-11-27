@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarjeta - Sistema Bancario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'clientes/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>Editar Tarjeta</h1>
+            <div class="client-info">
+                <span class="client-label">Cliente:</span>
+                <span class="client-name">{{ tarjeta.cliente.nombre }} {{ tarjeta.cliente.apellido }}</span>
+                <span class="categoria-badge {{ tarjeta.cliente.categoria|lower }}">
+                    {{ tarjeta.cliente.categoria }}
+                </span>
+            </div>
+        </div>
+
+        <div class="card-form-container">
+            <form method="post" class="styled-form">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                
+                <div class="form-actions">
+                    <button type="submit" class="submit-button">
+                        <span class="icon">💳</span>
+                        Actualizar Tarjeta
+                    </button>
+                    <a href="{% url 'clientes:detalle' tarjeta.cliente.id %}" class="cancel-button">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

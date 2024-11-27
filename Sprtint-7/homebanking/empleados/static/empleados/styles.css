@@ -17,7 +17,6 @@ body {
     margin: 0 auto;
   }
   
-  /* Títulos y texto */
   h1 {
     color: #fff;
     text-align: center;
@@ -26,7 +25,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
   
-  /* Tabla de empleados */
+
   table {
     width: 100%;
     border-collapse: separate;
@@ -56,7 +55,7 @@ body {
     transition: all 0.3s ease;
   }
   
-  /* Enlaces y botones */
+  
   .button {
     background: linear-gradient(45deg, #2980b9 0%, #3498db 100%);
     color: white;
@@ -110,7 +109,7 @@ body {
     box-shadow: 0 6px 20px rgba(192, 57, 43, 0.4);
   }
   
-  /* Detalles del empleado */
+  
   .client-details {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -137,7 +136,7 @@ body {
     background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
   }
   
-  /* Formularios */
+  
   form {
     display: flex;
     flex-direction: column;

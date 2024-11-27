@@ -61,7 +61,7 @@ def alta_tarjeta(request, pk):
             return redirect('clientes:detalle', pk=cliente.id)
     else:
         form = TarjetaForm()
-    return render(request, 'clientes/alta_tarjeta.html', {'form': form, 'cliente': cliente})  # Cambiado de nueva_tarjeta.html a alta_tarjeta.html
+    return render(request, 'clientes/nueva_tarjeta.html', {'form': form, 'cliente': cliente}) 
 
 @login_required
 def ayuda(request):

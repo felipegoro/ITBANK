@@ -9,32 +9,52 @@
 </head>
 <body>
     <div class="container">
-        <div class="detail-header">
-            <h1>Información del Cliente</h1>
-            <span class="categoria-badge {{ cliente.categoria|lower }}">
-                {{ cliente.categoria }}
-            </span>
-        </div>
+        <div class="client-card">
+            <div class="client-header">
+                <h1>Información del Cliente</h1>
+                <span class="categoria-badge {{ cliente.categoria|lower }}">
+                    {{ cliente.categoria }}
+                </span>
+            </div>
 
-        <div class="detail-info">
-            <p><strong>Nombre:</strong> {{ cliente.nombre }} {{ cliente.apellido }}</p>
-            <p><strong>DNI:</strong> {{ cliente.dni }}</p>
-            <p><strong>Límite de Préstamo:</strong> ${{ cliente.limite_prestamo }}</p>
-        </div>
+            <div class="client-info-grid">
+                <div class="info-group">
+                    <label>Nombre Completo</label>
+                    <p>{{ cliente.nombre }} {{ cliente.apellido }}</p>
+                </div>
+                <div class="info-group">
+                    <label>DNI</label>
+                    <p>{{ cliente.dni }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Límite de Préstamo</label>
+                    <p class="limite-prestamo">${{ cliente.limite_prestamo }}</p>
+                </div>
+            </div>
 
-        <div class="actions-grid">
-            <a href="{% url 'prestamos:lista_prestamos' cliente.id %}" class="action-card prestamos">
-                <h3>Préstamos</h3>
-                <p>Gestionar préstamos del cliente</p>
-            </a>
-            <a href="{% url 'clientes:nueva_tarjeta' cliente.id %}" class="action-card tarjetas">
-                <h3>Tarjetas</h3>
-                <p>Administrar tarjetas</p>
-            </a>
-        </div>
+            <div class="actions-grid">
+                <a href="{% url 'prestamos:lista_prestamos' cliente.id %}" class="action-card prestamos">
+                    <div class="card-icon">💰</div>
+                    <div class="card-content">
+                        <h3>Préstamos</h3>
+                        <p>Gestionar préstamos del cliente</p>
+                    </div>
+                </a>
+                <a href="{% url 'clientes:nueva_tarjeta' cliente.id %}" class="action-card tarjetas">
+                    <div class="card-icon">💳</div>
+                    <div class="card-content">
+                        <h3>Tarjetas</h3>
+                        <p>Administrar tarjetas</p>
+                    </div>
+                </a>
+            </div>
 
-        <div class="navigation-buttons">
-            <a href="{% url 'clientes:index' %}" class="nav-button back">Volver al Listado</a>
+            <div class="navigation">
+                <a href="{% url 'clientes:index' %}" class="back-button">
+                    <span class="button-icon">←</span>
+                    Volver al Listado
+                </a>
+            </div>
         </div>
     </div>
 </body>

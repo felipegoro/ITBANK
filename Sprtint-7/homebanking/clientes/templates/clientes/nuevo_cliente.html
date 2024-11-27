@@ -38,7 +38,7 @@
                     <div class="form-section account-data">
                         <h2>Datos de Cuenta</h2>
                         {% for field in form %}
-                            {% if field.name not in 'nombre,apellido,dni' %}
+                            {% if field.name not in 'nombre,apellido,dni,fecha_nacimiento' %}
                             <div class="form-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}

@@ -1,0 +1,46 @@
+@import './breakpoints.css';
+
+.fondo {
+    background-image: url('fondo_oficial.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 100vh; 
+    background-attachment: fixed;
+    opacity: 0.8; /* Ajusta el valor entre 0 y 1 */
+    z-index: -1; /* Asegúrate de que esté detrás del contenido */
+}
+
+
+.fotologin img {
+    width: 100%;
+    height: auto;    
+      
+    position: absolute; 
+    top: 240px;
+    left: 120px;
+    background-size: contain; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    z-index: -1; 
+}
+
+/* Imagen de fondo para tablets */
+@media (min-width: var(--breakpoint-mobile)) {
+    .fondo {
+      background-image: url('fondo_oficial.jpg');
+    }
+  }
+
+@media (min-width: var(--breakpoint-tablet)) {
+    .fondo {
+      background-image: url('fondo_oficial.jpg');
+    }
+  }
+  
+  /* Imagen de fondo para desktop */
+  @media (min-width: var(--breakpoint-desktop)) {
+    .fondo {
+      background-image: url('fondo_oficial.jpg');
+    }
+  }

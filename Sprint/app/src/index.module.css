@@ -1,0 +1,46 @@
+@import './breakpoints.css';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.fondo {
+  background-image: url('fondo_oficial.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+  background-attachment: fixed;
+  z-index: -1; /* Asegúrate de que esté detrás del contenido */
+}
+
+/* Imagen de fondo para tablets */
+@media (min-width: var(--breakpoint-mobile)) {
+  .fondo {
+    background-image: url('fondo_oficial.jpg');
+  }
+}
+
+@media (min-width: var(--breakpoint-tablet)) {
+  .fondo {
+    background-image: url('fondo_oficial.jpg');
+  }
+}
+
+/* Imagen de fondo para desktop */
+@media (min-width: var(--breakpoint-desktop)) {
+  .fondo {
+    background-image: url('fondo_oficial.jpg');
+  }
+}
+

@@ -1,0 +1,75 @@
+.inversiones_container {
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+}
+
+.inversiones_title {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 3px;
+}
+
+.inicio {
+    background-color: #00438b;
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%;
+    margin: 71px auto;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.descripcion {
+    color: #fcfcfc;
+}
+
+.inversiones_content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    align-items: center; /* Alinea los elementos hijos (inversion-card) al centro */
+}
+
+.inversion_card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%;
+    margin: 10px auto;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    text-align: center; 
+}
+
+.inversion_card:hover {
+    transform: translateY(-5px);
+}
+
+.inversion_card h2 {
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.inversion_card p {
+    font-size: 1rem;
+    color: #000000;
+}
+
+.inversion_button {
+    display: block;
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+    background-color: #00438b;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.inversion_button:hover {
+    background-color: #003366;
+}

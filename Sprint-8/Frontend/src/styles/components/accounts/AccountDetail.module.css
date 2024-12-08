@@ -1,0 +1,110 @@
+.accountDetailContainer {
+    padding: var(--spacing-lg);
+    background-color: var(--light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+}
+
+.accountInfo {
+    background-color: var(--gray-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.accountType {
+    font-size: var(--font-size-xl);
+    color: var(--dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.accountNumber {
+    color: var(--gray);
+    font-size: var(--font-size-md);
+}
+
+.balanceCard {
+    background-color: var(--primary-color);
+    color: var(--light);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.balanceLabel {
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+}
+
+.balanceAmount {
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+    margin-top: var(--spacing-xs);
+}
+
+.actionsSection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.actionButton {
+    padding: var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-md);
+    background-color: var(--light);
+    border: 1px solid var(--gray-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.actionButton:hover {
+    background-color: var(--gray-light);
+    transform: translateY(-2px);
+}
+
+.transactionsSection {
+    margin-top: var(--spacing-xl);
+}
+
+.sectionTitle {
+    font-size: var(--font-size-lg);
+    color: var(--dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .accountDetailContainer {
+        padding: var(--spacing-md);
+    }
+
+    .actionsSection {
+        grid-template-columns: 1fr;
+    }
+
+    .balanceAmount {
+        font-size: var(--font-size-xl);
+    }
+}

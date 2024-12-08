@@ -1,0 +1,126 @@
+.applicationContainer {
+    padding: var(--spacing-lg);
+    background-color: var(--light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.title {
+    font-size: var(--font-size-xl);
+    color: var(--dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.subtitle {
+    color: var(--gray);
+    font-size: var(--font-size-md);
+}
+
+.form {
+    display: grid;
+    gap: var(--spacing-lg);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.label {
+    font-size: var(--font-size-md);
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.input {
+    padding: var(--spacing-md);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-md);
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.select {
+    padding: var(--spacing-md);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-md);
+    background-color: var(--light);
+    cursor: pointer;
+}
+
+.calculatorSection {
+    background-color: var(--gray-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.calculatorResult {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.resultItem {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--light);
+    border-radius: var(--border-radius-md);
+}
+
+.resultLabel {
+    font-size: var(--font-size-sm);
+    color: var(--gray);
+    margin-bottom: var(--spacing-xs);
+}
+
+.resultValue {
+    font-size: var(--font-size-lg);
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.submitButton {
+    padding: var(--spacing-md);
+    background-color: var(--primary-color);
+    color: var(--light);
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: var(--primary-dark);
+}
+
+.submitButton:disabled {
+    background-color: var(--gray);
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .applicationContainer {
+        padding: var(--spacing-md);
+    }
+
+    .calculatorResult {
+        grid-template-columns: 1fr;
+    }
+}

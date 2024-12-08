@@ -1,0 +1,275 @@
+/* Container principal */
+.dashboard {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--dark) 0%, #1a237e 100%);
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efectos de fondo animados */
+.dashboard::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(0, 176, 255, 0.1) 100%
+    );
+    animation: wave 20s infinite linear;
+    z-index: 0;
+}
+
+.dashboard::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(
+        -45deg,
+        transparent 0%,
+        rgba(25, 118, 210, 0.1) 100%
+    );
+    animation: wave 15s infinite linear reverse;
+    z-index: 0;
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Contenedor principal del contenido */
+.dashboardWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Título de bienvenida */
+.dashboard h1 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xl);
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(0, 176, 255, 0.7);
+    position: relative;
+    padding-bottom: var(--spacing-md);
+    letter-spacing: 1px;
+}
+
+.dashboard h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #00b0ff, transparent);
+    border-radius: var(--border-radius-full);
+    box-shadow: 0 0 10px rgba(0, 176, 255, 0.5);
+}
+
+/* Títulos de sección principales */
+.dashboard h2, 
+.movementTitle,
+.accountTitle {
+    color: #00b0ff;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(0, 176, 255, 0.5);
+}
+
+/* Textos y enlaces generales */
+.dashboard p,
+.dashboard a,
+.dashboard span,
+.balanceText,
+.movementText {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Grid de contenido */
+.dashboardContent {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+/* Tarjetas */
+.dashboardCard {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    color: #ffffff;
+}
+
+.dashboardCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Títulos de sección */
+.sectionTitle {
+    color: #00b0ff;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(0, 176, 255, 0.5);
+}
+
+/* Enlaces "Ver todos/todas" */
+.viewAllLink {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    background: rgba(0, 176, 255, 0.2);
+    margin-top: var(--spacing-sm);
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(0, 176, 255, 0.4);
+}
+
+.viewAllLink:hover {
+    background: rgba(0, 176, 255, 0.3);
+    transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Información de balance y movimientos */
+.balanceInfo, .movementInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    color: #ffffff;
+}
+
+.balanceInfo:hover, .movementInfo:hover {
+    background: rgba(0, 176, 255, 0.1);
+    transform: translateX(5px);
+}
+
+/* Valores y fechas */
+.amount {
+    font-weight: 600;
+    color: #00b0ff;
+    text-shadow: 0 0 10px rgba(0, 176, 255, 0.3);
+}
+
+.balanceAmount {
+    color: #00b0ff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(0, 176, 255, 0.5);
+}
+
+.date {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-size-sm);
+}
+
+/* Valores positivos y negativos */
+.positiveAmount {
+    color: #4caf50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.negativeAmount {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+/* Contenedor de error */
+.errorContainer {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Botón de reintentar */
+.retryButton {
+    background: linear-gradient(90deg, #00b0ff, #1976d2);
+    color: #ffffff;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    margin-top: var(--spacing-md);
+}
+
+.retryButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 0 15px rgba(0, 176, 255, 0.4),
+        0 0 0 2px rgba(0, 176, 255, 0.2);
+}
+
+/* Subtítulos y etiquetas */
+.label,
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Texto dentro de las tarjetas */
+.dashboardCard p,
+.dashboardCard span {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: calc(var(--spacing-xl) + 60px) var(--spacing-md) var(--spacing-lg);
+    }
+
+    .dashboard h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .dashboardContent {
+        grid-template-columns: 1fr;
+    }
+
+    .balanceInfo, .movementInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+}

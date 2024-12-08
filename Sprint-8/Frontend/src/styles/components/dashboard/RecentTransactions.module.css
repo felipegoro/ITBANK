@@ -1,0 +1,122 @@
+.transactionsCard {
+    background-color: var(--light);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.cardTitle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--dark);
+}
+
+.cardTitle h2 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+.cardIcon {
+    color: var(--primary-color);
+}
+
+.viewAllLink {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.3s ease;
+}
+
+.viewAllLink:hover {
+    color: var(--primary-dark);
+}
+
+.transactionsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.transactionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    background-color: var(--gray-light);
+    transition: transform 0.3s ease;
+}
+
+.transactionItem:hover {
+    transform: translateX(5px);
+}
+
+.transactionInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.transactionIcon {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--light);
+}
+
+.transactionIcon.income {
+    color: var(--success-color);
+}
+
+.transactionIcon.expense {
+    color: var(--danger-color);
+}
+
+.transactionDetails {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.transactionDescription {
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.transactionDate {
+    font-size: var(--font-size-sm);
+    color: var(--gray);
+}
+
+.transactionAmount {
+    font-weight: 500;
+}
+
+.transactionAmount.income {
+    color: var(--success-color);
+}
+
+.transactionAmount.expense {
+    color: var(--danger-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .transactionsCard {
+        padding: var(--spacing-md);
+    }
+
+    .transactionInfo {
+        gap: var(--spacing-md);
+    }
+}

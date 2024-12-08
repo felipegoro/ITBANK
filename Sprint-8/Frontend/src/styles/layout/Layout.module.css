@@ -1,0 +1,25 @@
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.main {
+    flex: 1;
+    padding: var(--spacing-lg);
+    background-color: var(--background);
+    margin-left: 250px; /* ancho del sidebar */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        padding: var(--spacing-md);
+    }
+}

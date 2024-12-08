@@ -1,9 +1,19 @@
 ﻿# Dependencies
 **/node_modules/
+node_modules/
+
+# Frontend specific
+Frontend/frontend/*
+!Frontend/frontend/src/
+!Frontend/frontend/public/
+!Frontend/frontend/package.json
+!Frontend/frontend/package-lock.json
 
 # Production
 **/build/
 **/dist/
+build/
+dist/
 
 # Environment files
 **/.env
@@ -11,24 +21,31 @@
 **/.env.development.local
 **/.env.test.local
 **/.env.production.local
+.env
+.env.local
 
 # Testing
 **/coverage/
+coverage/
 
 # Logs
-**/npm-debug.log*
-**/yarn-debug.log*
-**/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Editor directories and files
+.idea/
+.vscode/
 **/.idea/
 **/.vscode/
-**/*.suo
-**/*.ntvs*
-**/*.njsproj
-**/*.sln
-**/*.sw?
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # System files
+.DS_Store
+Thumbs.db
 **/.DS_Store
 **/Thumbs.db

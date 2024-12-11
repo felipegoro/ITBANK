@@ -10,9 +10,10 @@ const ProfileEdit = () => {
     
     const [formData, setFormData] = useState({
         nombre: user?.nombre || '',
+        apellido: user?.apellido || '',
         email: user?.email || '',
         telefono: user?.telefono || '',
-        direccion: user?.direccion || ''
+        direccion: user?.direccion || '',
     });
 
     const handleChange = (e) => {
@@ -26,8 +27,7 @@ const ProfileEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Aquí irá la lógica para actualizar el perfil
-            // await dispatch(updateProfile(formData));
+            // Aquí iría la lógica para actualizar el perfil
             navigate('/profile');
         } catch (error) {
             console.error('Error al actualizar el perfil:', error);
@@ -36,16 +36,13 @@ const ProfileEdit = () => {
 
     return (
         <div className={styles.editContainer}>
-            <div className={styles.header}>
-                <h1 className={styles.title}>Editar Perfil</h1>
-            </div>
+            <h1 className={styles.title}>Editar Perfil</h1>
             
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.formSection}>
-                    <h2 className={styles.sectionTitle}>Información Personal</h2>
-                    
+                    <h3>Información Personal</h3>
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Nombre</label>
+                        <label>Nombre</label>
                         <input
                             type="text"
                             name="nombre"
@@ -54,21 +51,28 @@ const ProfileEdit = () => {
                             className={styles.input}
                         />
                     </div>
-
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Email</label>
+                        <label>Apellido</label>
+                        <input
+                            type="text"
+                            name="apellido"
+                            value={formData.apellido}
+                            onChange={handleChange}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label>Email</label>
                         <input
                             type="email"
                             name="email"
                             value={formData.email}
-                            onChange={handleChange}
                             className={styles.input}
                             disabled
                         />
                     </div>
-
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Teléfono</label>
+                        <label>Teléfono</label>
                         <input
                             type="tel"
                             name="telefono"
@@ -77,9 +81,8 @@ const ProfileEdit = () => {
                             className={styles.input}
                         />
                     </div>
-
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Dirección</label>
+                        <label>Dirección</label>
                         <input
                             type="text"
                             name="direccion"

@@ -1,12 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../features/auth/authSlice';
+import { logout } from '../../features/auth/authThunks';  // Añadir esta importación
 import styles from '../../styles/components/common/Header.module.css';
 
 const Header = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { user } = useSelector(state => state.auth);
+
+    const handleLogout = async () => {
+        try {
+            // Ejecutamos el logout
+            await dispatch(logout()).unwrap();
+            
+            // Limpiamos el token y cualquier otra información de autenticación
+            localStorage.clear();
+            
+            // Redirigimos al usuario a la página de login
+            navigate('/login');
+        } catch (error) {
+            console.error('Error durante el logout:', error);
+        }
+    };
 
     return (
         <header className={styles.header}>
@@ -24,10 +40,10 @@ const Header = () => {
                 </nav>
                 <div className={styles.userSection}>
                     <div className={styles.userInfo}>
-                        <span className={styles.userEmail}>{user?.email}</span>
+                        <span className={styles.userName}>{user?.email}</span>
                     </div>
                     <button 
-                        onClick={() => dispatch(logout())}
+                        onClick={handleLogout}
                         className={styles.logoutButton}
                     >
                         Cerrar Sesión

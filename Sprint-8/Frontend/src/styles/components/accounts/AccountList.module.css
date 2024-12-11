@@ -1,125 +1,116 @@
 .accountListContainer {
-    padding: var(--spacing-lg);
-    background-color: var(--light);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    min-height: calc(100vh - 4rem); /* Ajustado para el padding */
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 2rem;
 }
 
 .title {
-    font-size: var(--font-size-xl);
-    color: var(--dark);
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
 }
 
-.accountList {
-    display: grid;
-    gap: var(--spacing-md);
-}
-
-.accountCard {
-    background-color: var(--light);
-    border: 1px solid var(--gray-light);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-lg);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.accountCard:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.accountHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-md);
-}
-
-.accountType {
-    font-size: var(--font-size-lg);
-    font-weight: 500;
-    color: var(--primary-color);
-}
-
-.accountNumber {
-    color: var(--gray);
-    font-size: var(--font-size-sm);
-}
-
-.balanceSection {
-    margin-top: var(--spacing-md);
-    padding-top: var(--spacing-md);
-    border-top: 1px solid var(--gray-light);
-}
-
-.balanceLabel {
-    color: var(--gray);
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--spacing-xs);
-}
-
-.balanceAmount {
-    font-size: var(--font-size-xl);
-    font-weight: bold;
-    color: var(--dark);
-}
-
-.actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-md);
-}
-
-.actionButton {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
+.newAccountButton {
+    background: #00b0ff;
+    color: white;
+    padding: 0.75rem 1.5rem;
     border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.viewButton {
-    background-color: var(--primary-color);
-    color: var(--light);
+.newAccountButton:hover {
+    background: #0091ea;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-.viewButton:hover {
-    background-color: var(--primary-dark);
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 3rem;
+    margin: auto; /* Esto centrará verticalmente */
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 10vh; /* Esto bajará el contenedor un poco */
 }
 
-.transferButton {
-    background-color: var(--secondary-color);
-    color: var(--light);
+.emptyState p {
+    font-size: 1.25rem;
+    color: #e0e0e0;
+    margin-bottom: 2rem; /* Aumentado el espacio antes del botón */
 }
 
-.transferButton:hover {
-    background-color: var(--secondary-dark);
+.emptyState .newAccountButton {
+    background: #00b0ff;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    margin-top: 1rem; /* Espacio adicional arriba del botón */
 }
 
-/* Responsive */
+/* Loading state */
+.loading {
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .accountListContainer {
-        padding: var(--spacing-md);
+        padding: 1rem;
     }
 
-    .accountCard {
-        padding: var(--spacing-md);
+    .title {
+        font-size: 2rem;
     }
 
-    .actions {
-        flex-direction: column;
+    .newAccountButton {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 
-    .actionButton {
-        width: 100%;
+    .emptyState {
+        padding: 2rem 1rem;
+        margin: 1rem;
+        top: 5vh; /* Menos espacio en móviles */
     }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.emptyState {
+    animation: fadeIn 0.5s ease-out;
 }

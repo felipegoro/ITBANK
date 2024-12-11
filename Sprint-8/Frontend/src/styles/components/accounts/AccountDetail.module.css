@@ -1,8 +1,8 @@
 .accountDetailContainer {
     padding: var(--spacing-lg);
-    background-color: var(--light);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, var(--dark) 0%, #1a237e 100%);
+    min-height: 100vh;
+    color: var(--light);
 }
 
 .header {
@@ -15,47 +15,60 @@
 .backButton {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--primary-color);
+    gap: var(--spacing-sm);
+    color: #00b0ff;
     text-decoration: none;
-    font-size: var(--font-size-sm);
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    transition: all 0.3s ease;
+}
+
+.backButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
 }
 
 .accountInfo {
-    background-color: var(--gray-light);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-lg);
 }
 
 .accountType {
-    font-size: var(--font-size-xl);
-    color: var(--dark);
+    font-size: 2rem;
+    color: #00b0ff;
     margin-bottom: var(--spacing-sm);
+    text-shadow: 0 0 10px rgba(0, 176, 255, 0.5);
 }
 
 .accountNumber {
-    color: var(--gray);
-    font-size: var(--font-size-md);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
 }
 
 .balanceCard {
-    background-color: var(--primary-color);
-    color: var(--light);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, #00b0ff, #1976d2);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .balanceLabel {
-    font-size: var(--font-size-sm);
+    font-size: 1rem;
     opacity: 0.8;
+    margin-bottom: var(--spacing-sm);
 }
 
 .balanceAmount {
-    font-size: var(--font-size-xxl);
-    font-weight: bold;
-    margin-top: var(--spacing-xs);
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .actionsSection {
@@ -66,45 +79,139 @@
 }
 
 .actionButton {
-    padding: var(--spacing-md);
-    border: none;
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--border-radius-md);
-    background-color: var(--light);
-    border: 1px solid var(--gray-light);
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
+    font-weight: 500;
+    text-align: center;
 }
 
 .actionButton:hover {
-    background-color: var(--gray-light);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
 }
 
 .transactionsSection {
-    margin-top: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
 }
 
 .sectionTitle {
-    font-size: var(--font-size-lg);
-    color: var(--dark);
+    font-size: 1.5rem;
+    color: #00b0ff;
     margin-bottom: var(--spacing-lg);
+    text-shadow: 0 0 10px rgba(0, 176, 255, 0.5);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .accountDetailContainer {
         padding: var(--spacing-md);
+    }
+
+    .balanceAmount {
+        font-size: 2.5rem;
     }
 
     .actionsSection {
         grid-template-columns: 1fr;
     }
 
-    .balanceAmount {
-        font-size: var(--font-size-xl);
+    .accountType {
+        font-size: 1.5rem;
     }
+}
+
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transactionInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.transactionType {
+    font-weight: 500;
+    color: var(--light);
+}
+
+.transactionDate {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.transactionAmount {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modalContent {
+    background: var(--dark);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 500px;
+}
+
+.modalContent form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.modalContent input {
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-md);
+    color: white;
+}
+
+.modalActions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.modalActions button {
+    flex: 1;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modalActions button[type="submit"] {
+    background: var(--primary-color);
+    color: white;
+}
+
+.modalActions button[type="button"] {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
 }

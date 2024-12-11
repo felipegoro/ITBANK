@@ -1,38 +1,75 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchCards } from '../../features/cards/cardsSlice';
-import Loading from '../common/Loading';
 import styles from '../../styles/components/cards/CardList.module.css';
 
 const CardList = () => {
     const dispatch = useDispatch();
-    const { cards, isLoading, error } = useSelector((state) => state.cards);
+    const navigate = useNavigate();
+    
+    const mockCards = [
+        {
+            id: 1,
+            tipo_tarjeta: 'Visa Gold',
+            numero_tarjeta: '4532 **** **** 1234',
+            saldo: 50000,
+            estado: 'activa',
+            color: '#FFD700'
+        },
+        {
+            id: 2,
+            tipo_tarjeta: 'Mastercard Black',
+            numero_tarjeta: '5423 **** **** 5678',
+            saldo: 75000,
+            estado: 'activa',
+            color: '#000000'
+        }
+    ];
 
-    useEffect(() => {
-        dispatch(fetchCards());
-    }, [dispatch]);
-
-    if (isLoading) return <Loading />;
-    if (error) return <div className="error-message">{error}</div>;
+    const cards = mockCards;
 
     return (
-        <div className="card-list">
-            <h2>Mis Tarjetas</h2>
-            <div className="cards-grid">
+        <div className={styles.cardListContainer}>
+            <div className={styles.header}>
+                <h1 className={styles.title}>Mis Tarjetas</h1>
+                <button className={styles.newCardButton}>
+                    Nueva Tarjeta
+                </button>
+            </div>
+
+            <div className={styles.cardGrid}>
                 {cards.map((card) => (
-                    <div key={card.id} className="card-item">
-                        <h3>{card.tipo_tarjeta}</h3>
-                        <p className="card-number">N°: {card.numero_tarjeta}</p>
-                        <p className="card-balance">
-                            Saldo: ${card.saldo.toLocaleString()}
-                        </p>
-                        <Link 
-                            to={`/cards/${card.id}`}
-                            className="view-details-btn"
+                    <div key={card.id} className={styles.cardItem}>
+                        <div 
+                            className={styles.cardFront}
+                            style={{
+                                background: `linear-gradient(135deg, ${card.color} 0%, rgba(0,0,0,0.8) 100%)`
+                            }}
                         >
-                            Ver Detalles
-                        </Link>
+                            <div className={styles.cardHeader}>
+                                <h3 className={styles.cardType}>{card.tipo_tarjeta}</h3>
+                                <div className={styles.chipIcon}>
+                                    <div className={styles.chip}></div>
+                                </div>
+                            </div>
+                            
+                            <div className={styles.cardNumber}>
+                                {card.numero_tarjeta}
+                            </div>
+                            
+                            <div className={styles.cardFooter}>
+                                <div className={styles.cardBalance}>
+                                    ${card.saldo.toLocaleString()}
+                                </div>
+                                <Link 
+                                    to={`/cards/${card.id}`}
+                                    className={styles.viewDetailsBtn}
+                                >
+                                    Ver Detalles
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

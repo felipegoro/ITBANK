@@ -1,12 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunks
+// Constants
+const API_BASE_URL = '/api/cards';
+
+// Initial state
+const initialState = {
+    cards: [],
+    selectedCard: null,
+    isLoading: false,
+    error: null,
+    lastUpdated: null,
+    requestStatus: null,
+    operationSuccess: false
+};
+
+// Async Thunks
 export const fetchCards = createAsyncThunk(
     'cards/fetchCards',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get('/api/cards');
+            const response = await axios.get(API_BASE_URL);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -18,7 +32,19 @@ export const fetchCardDetails = createAsyncThunk(
     'cards/fetchCardDetails',
     async (cardId, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`/api/cards/${cardId}`);
+            const response = await axios.get(`${API_BASE_URL}/${cardId}`);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const requestNewCard = createAsyncThunk(
+    'cards/requestNewCard',
+    async (cardData, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/request`, cardData);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -30,7 +56,7 @@ export const activateCard = createAsyncThunk(
     'cards/activateCard',
     async (cardId, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`/api/cards/${cardId}/activate`);
+            const response = await axios.post(`${API_BASE_URL}/${cardId}/activate`);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -42,7 +68,7 @@ export const blockCard = createAsyncThunk(
     'cards/blockCard',
     async (cardId, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`/api/cards/${cardId}/block`);
+            const response = await axios.post(`${API_BASE_URL}/${cardId}/block`);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -50,14 +76,25 @@ export const blockCard = createAsyncThunk(
     }
 );
 
-// Initial state
-const initialState = {
-    cards: [],
-    selectedCard: null,
-    isLoading: false,
-    error: null,
-    lastUpdated: null,
-    operationSuccess: false
+// Reducer Helpers
+const setPending = (state) => {
+    state.isLoading = true;
+    state.error = null;
+};
+
+const setError = (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload?.message || 'Error en la operación';
+};
+
+const updateCardInState = (state, payload) => {
+    const index = state.cards.findIndex(card => card.id === payload.id);
+    if (index !== -1) {
+        state.cards[index] = payload;
+    }
+    if (state.selectedCard?.id === payload.id) {
+        state.selectedCard = payload;
+    }
 };
 
 // Slice
@@ -73,89 +110,73 @@ const cardsSlice = createSlice({
         },
         clearOperationSuccess: (state) => {
             state.operationSuccess = false;
+        },
+        clearRequestStatus: (state) => {
+            state.requestStatus = null;
         }
     },
     extraReducers: (builder) => {
         builder
             // Fetch Cards
-            .addCase(fetchCards.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
+            .addCase(fetchCards.pending, setPending)
             .addCase(fetchCards.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.cards = action.payload;
                 state.lastUpdated = new Date().toISOString();
             })
-            .addCase(fetchCards.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload?.message || 'Error al cargar las tarjetas';
-            })
+            .addCase(fetchCards.rejected, setError)
 
             // Fetch Card Details
-            .addCase(fetchCardDetails.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
+            .addCase(fetchCardDetails.pending, setPending)
             .addCase(fetchCardDetails.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.selectedCard = action.payload;
             })
-            .addCase(fetchCardDetails.rejected, (state, action) => {
+            .addCase(fetchCardDetails.rejected, setError)
+
+            // Request New Card
+            .addCase(requestNewCard.pending, (state) => {
+                setPending(state);
+                state.requestStatus = 'pending';
+            })
+            .addCase(requestNewCard.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload?.message || 'Error al cargar los detalles de la tarjeta';
+                state.cards.push(action.payload);
+                state.requestStatus = 'success';
+                state.operationSuccess = true;
+            })
+            .addCase(requestNewCard.rejected, (state, action) => {
+                setError(state, action);
+                state.requestStatus = 'failed';
             })
 
             // Activate Card
-            .addCase(activateCard.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-                state.operationSuccess = false;
-            })
+            .addCase(activateCard.pending, setPending)
             .addCase(activateCard.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.operationSuccess = true;
-                // Actualizar el estado de la tarjeta en la lista
-                const index = state.cards.findIndex(card => card.id === action.payload.id);
-                if (index !== -1) {
-                    state.cards[index] = action.payload;
-                }
-                if (state.selectedCard?.id === action.payload.id) {
-                    state.selectedCard = action.payload;
-                }
+                updateCardInState(state, action.payload);
             })
-            .addCase(activateCard.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload?.message || 'Error al activar la tarjeta';
-            })
+            .addCase(activateCard.rejected, setError)
 
             // Block Card
-            .addCase(blockCard.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-                state.operationSuccess = false;
-            })
+            .addCase(blockCard.pending, setPending)
             .addCase(blockCard.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.operationSuccess = true;
-                // Actualizar el estado de la tarjeta en la lista
-                const index = state.cards.findIndex(card => card.id === action.payload.id);
-                if (index !== -1) {
-                    state.cards[index] = action.payload;
-                }
-                if (state.selectedCard?.id === action.payload.id) {
-                    state.selectedCard = action.payload;
-                }
+                updateCardInState(state, action.payload);
             })
-            .addCase(blockCard.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload?.message || 'Error al bloquear la tarjeta';
-            });
+            .addCase(blockCard.rejected, setError);
     }
 });
 
 // Actions
-export const { clearCardError, clearSelectedCard, clearOperationSuccess } = cardsSlice.actions;
+export const { 
+    clearCardError, 
+    clearSelectedCard, 
+    clearOperationSuccess,
+    clearRequestStatus 
+} = cardsSlice.actions;
 
 // Selectors
 export const selectAllCards = (state) => state.cards.cards;
@@ -165,6 +186,6 @@ export const selectCardsLoading = (state) => state.cards.isLoading;
 export const selectCardsError = (state) => state.cards.error;
 export const selectSelectedCard = (state) => state.cards.selectedCard;
 export const selectOperationSuccess = (state) => state.cards.operationSuccess;
+export const selectRequestStatus = (state) => state.cards.requestStatus;
 
-// Reducer
 export default cardsSlice.reducer;

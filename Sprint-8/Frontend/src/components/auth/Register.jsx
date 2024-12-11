@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { register, clearError } from '../../features/auth/authSlice';
-
+import { register } from '../../features/auth/authThunks';
+import styles from '../../styles/pages/Register.module.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -27,42 +27,82 @@ const Register = () => {
         }
     }, [registrationSuccess, navigate]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const userData = {
-                nombre: formData.nombre,
-                apellido: formData.apellido,
-                dni: formData.dni,
-                email: formData.email,
-                username: formData.username,
-                password: formData.password,
-                fecha_nacimiento: formData.fecha_nacimiento
-            };
-            await dispatch(register(userData)).unwrap();
-        } catch (error) {
-            console.error('Error en el registro:', error);
+    const validateForm = () => {
+        const errors = {};
+        
+        if (formData.password !== formData.confirmPassword) {
+            errors.confirmPassword = 'Las contraseñas no coinciden';
         }
+        
+        if (formData.dni.length !== 8) {
+            errors.dni = 'El DNI debe tener 8 dígitos';
+        }
+
+        setFormErrors(errors);
+        return Object.keys(errors).length === 0;
     };
 
+    // Frontend/src/components/auth/Register.jsx
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+    
+        const userData = {
+            first_name: formData.nombre,
+            last_name: formData.apellido,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            dni: formData.dni,
+            fecha_nacimiento: formData.fecha_nacimiento
+        };
+    
+        try {
+            await dispatch(register(userData)).unwrap();
+            navigate('/login');
+        } catch (error) {
+            setFormErrors({
+                ...formErrors,
+                submit: error.message || "Error al registrar usuario"
+            });
+        }
+    };
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
+        // Limpiar error del campo cuando el usuario empiece a escribir
+        if (formErrors[name]) {
+            setFormErrors(prev => ({
+                ...prev,
+                [name]: ''
+            }));
+        }
     };
 
     return (
-        <div className="register-container">
-            <div className="register-card">
-                <h2>Registro de Usuario</h2>
-                {error && <div className="error-message">{error}</div>}
+        <div className={styles.registerContainer}>
+            <div className={styles.registerCard}>
+                <h2 className={styles.registerTitle}>Registro de Usuario</h2>
                 
-                <form onSubmit={handleSubmit} className="register-form">
-                    <div className="form-group">
-                        <label htmlFor="nombre">Nombre</label>
+                {(error || formErrors.submit) && (
+                    <div className={styles.errorMessage}>
+                        {error || formErrors.submit}
+                    </div>
+                )}
+                
+                <form onSubmit={handleSubmit} className={styles.registerForm}>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="nombre">Nombre</label>
                         <input
+                            className={styles.input}
                             type="text"
                             id="nombre"
                             name="nombre"
@@ -72,9 +112,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="apellido">Apellido</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="apellido">Apellido</label>
                         <input
+                            className={styles.input}
                             type="text"
                             id="apellido"
                             name="apellido"
@@ -84,9 +125,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="dni">DNI</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="dni">DNI</label>
                         <input
+                            className={styles.input}
                             type="text"
                             id="dni"
                             name="dni"
@@ -98,9 +140,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="fecha_nacimiento">Fecha de Nacimiento</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="fecha_nacimiento">Fecha de Nacimiento</label>
                         <input
+                            className={styles.input}
                             type="date"
                             id="fecha_nacimiento"
                             name="fecha_nacimiento"
@@ -110,9 +153,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="email">Email</label>
                         <input
+                            className={styles.input}
                             type="email"
                             id="email"
                             name="email"
@@ -122,9 +166,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="username">Usuario</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="username">Usuario</label>
                         <input
+                            className={styles.input}
                             type="text"
                             id="username"
                             name="username"
@@ -134,9 +179,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">Contraseña</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="password">Contraseña</label>
                         <input
+                            className={styles.input}
                             type="password"
                             id="password"
                             name="password"
@@ -146,9 +192,10 @@ const Register = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="confirmPassword">Confirmar Contraseña</label>
                         <input
+                            className={styles.input}
                             type="password"
                             id="confirmPassword"
                             name="confirmPassword"
@@ -160,13 +207,13 @@ const Register = () => {
 
                     <button 
                         type="submit" 
-                        className="register-button"
+                        className={styles.registerButton}
                         disabled={isLoading}
                     >
                         {isLoading ? 'Registrando...' : 'Registrarse'}
                     </button>
 
-                    <div className="auth-links">
+                    <div className={styles.authLinks}>
                         <Link to="/login">¿Ya tienes cuenta? Inicia sesión aquí</Link>
                     </div>
                 </form>

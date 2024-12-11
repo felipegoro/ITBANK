@@ -1,133 +1,163 @@
-.loanListContainer {
-    padding: var(--spacing-lg);
-    background-color: var(--light);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
+.loansContainer {
+    padding: 2rem;
+    min-height: calc(100vh - 4rem);
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 3rem;
 }
 
 .title {
-    font-size: var(--font-size-xl);
-    color: var(--dark);
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
 }
 
 .newLoanButton {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    background-color: var(--primary-color);
-    color: var(--light);
-    border: none;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background: #00b0ff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .newLoanButton:hover {
-    background-color: var(--primary-dark);
+    background: #0091ea;
+    transform: translateY(-2px);
 }
 
-.loanGrid {
+.loansGrid {
     display: grid;
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
 }
 
 .loanCard {
-    background-color: var(--gray-light);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-lg);
-    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
 }
 
 .loanCard:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 .loanHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 1rem;
 }
 
 .loanType {
-    font-size: var(--font-size-lg);
-    color: var(--dark);
-    font-weight: 500;
+    color: white;
+    font-size: 1.25rem;
+    margin: 0;
 }
 
 .loanStatus {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-    font-size: var(--font-size-sm);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
-.statusActive {
-    background-color: var(--success-color);
-    color: var(--light);
+.aprobado {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
 }
 
-.statusPending {
-    background-color: var(--warning-color);
-    color: var(--dark);
+.pendiente {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FFA000;
+}
+
+.rechazado {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+.loanAmount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 1rem 0;
 }
 
 .loanDetails {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
+    margin: 1.5rem 0;
 }
 
 .detailItem {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
+    justify-content: space-between;
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
 }
 
-.detailLabel {
-    font-size: var(--font-size-sm);
-    color: var(--gray);
+.viewDetailsButton {
+    display: block;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-.detailValue {
-    font-size: var(--font-size-md);
-    color: var(--dark);
-    font-weight: 500;
+.viewDetailsButton:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.progressBar {
-    height: 8px;
-    background-color: var(--gray-light);
-    border-radius: var(--border-radius-full);
-    overflow: hidden;
-    margin: var(--spacing-md) 0;
+.emptyState {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
 }
 
-.progressFill {
-    height: 100%;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+.emptyState p {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
 }
 
-/* Responsive */
+.errorMessage {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
-    .loanListContainer {
-        padding: var(--spacing-md);
+    .loansContainer {
+        padding: 1rem;
     }
 
     .header {
         flex-direction: column;
-        gap: var(--spacing-md);
-        align-items: stretch;
+        gap: 1rem;
+        text-align: center;
     }
 
-    .newLoanButton {
-        width: 100%;
+    .title {
+        font-size: 2rem;
     }
 }

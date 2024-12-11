@@ -14,51 +14,65 @@ const TransactionList = () => {
     }, [dispatch]);
 
     if (isLoading) return <Loading />;
-    if (error) return <div className="error-message">{error}</div>;
 
     return (
-        <div className="transaction-list">
-            <div className="transaction-header">
-                <h2>Historial de Transacciones</h2>
-                <Link to="/transactions/new" className="new-transaction-btn">
+        <div className={styles.transactionListContainer}>
+            <div className={styles.header}>
+                <h1 className={styles.title}>Transferencias</h1>
+                <Link to="/transactions/new" className={styles.newTransactionButton}>
                     Nueva Transferencia
                 </Link>
             </div>
 
-            <div className="transactions-container">
+            {error && <div className={styles.errorMessage}>{error}</div>}
+
+            <div className={styles.transactionsGrid}>
                 {transactions?.length === 0 ? (
-                    <div className="no-transactions">
-                        <p>No hay transacciones para mostrar.</p>
+                    <div className={styles.emptyState}>
+                        <p>No hay transferencias realizadas</p>
+                        <Link to="/transactions/new" className={styles.newTransactionButton}>
+                            Realizar mi primera transferencia
+                        </Link>
                     </div>
                 ) : (
-                    <div className="transactions-table">
-                        <div className="table-header">
-                            <div>Fecha</div>
-                            <div>Descripción</div>
-                            <div>Tipo</div>
-                            <div>Monto</div>
-                            <div>Estado</div>
-                        </div>
-                        {transactions.map((transaction) => (
-                            <div key={transaction.id} className="transaction-row">
-                                <div className="transaction-date">
+                    transactions.map((transaction) => (
+                        <div key={transaction.id} className={styles.transactionCard}>
+                            <div className={styles.transactionHeader}>
+                                <span className={styles.transactionDate}>
                                     {new Date(transaction.fecha).toLocaleDateString()}
-                                </div>
-                                <div className="transaction-description">
-                                    {transaction.descripcion}
-                                </div>
-                                <div className="transaction-type">
-                                    {transaction.tipo}
-                                </div>
-                                <div className={`transaction-amount ${transaction.tipo}`}>
+                                </span>
+                                <span className={`${styles.transactionStatus} ${styles[transaction.estado.toLowerCase()]}`}>
+                                    {transaction.estado}
+                                </span>
+                            </div>
+                            
+                            <div className={styles.transactionBody}>
+                                <div className={styles.transactionAmount}>
                                     ${transaction.monto.toLocaleString()}
                                 </div>
-                                <div className={`transaction-status ${transaction.estado.toLowerCase()}`}>
-                                    {transaction.estado}
+                                <div className={styles.transactionDescription}>
+                                    {transaction.descripcion}
                                 </div>
                             </div>
-                        ))}
-                    </div>
+
+                            <div className={styles.transactionFooter}>
+                                <div className={styles.accountInfo}>
+                                    <div className={styles.originAccount}>
+                                        De: {transaction.cuenta_origen}
+                                    </div>
+                                    <div className={styles.destinationAccount}>
+                                        Para: {transaction.cuenta_destino}
+                                    </div>
+                                </div>
+                                <Link 
+                                    to={`/transactions/${transaction.id}`}
+                                    className={styles.viewDetailsButton}
+                                >
+                                    Ver Detalles
+                                </Link>
+                            </div>
+                        </div>
+                    ))
                 )}
             </div>
         </div>

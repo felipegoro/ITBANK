@@ -9,97 +9,104 @@ from decimal import Decimal
 from .models import Cuenta, TipoCuenta, MovimientoCuenta
 from .serializers import (
     CuentaSerializer,
+    CuentaCreateSerializer,
+    CuentaResumenSerializer,
     TipoCuentaSerializer,
     MovimientoCuentaSerializer,
 )
 
-class TipoCuentaViewSet(viewsets.ModelViewSet):
+class TipoCuentaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = TipoCuenta.objects.all()
     serializer_class = TipoCuentaSerializer
     permission_classes = [IsAuthenticated]
 
+    @action(detail=False, methods=['get'])
+    def disponibles(self, request):
+        """Retorna los tipos de cuenta disponibles para crear"""
+        tipos = self.get_queryset()
+        serializer = self.get_serializer(tipos, many=True)
+        return Response(serializer.data)
+
 class CuentaViewSet(viewsets.ModelViewSet):
-    serializer_class = CuentaSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return CuentaCreateSerializer
+        if self.action == 'list':
+            return CuentaResumenSerializer
+        return CuentaSerializer
+
     def get_queryset(self):
-        if self.request.user.is_staff:
-            return Cuenta.objects.all()
-        return Cuenta.objects.filter(cliente__user=self.request.user)
+        return Cuenta.objects.filter(titular=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        """Crear una nueva cuenta"""
+        try:
+            # Agregar el titular automáticamente
+            data = request.data.copy()
+            data['titular'] = request.user.id
+            
+            serializer = self.get_serializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            cuenta = serializer.save(titular=request.user)
+
+            # Crear el primer movimiento como depósito inicial si existe
+            saldo_inicial = Decimal(data.get('saldo_inicial', '0'))
+            if saldo_inicial > 0:
+                MovimientoCuenta.objects.create(
+                    cuenta=cuenta,
+                    tipo='DEPOSITO',
+                    monto=saldo_inicial,
+                    descripcion='Depósito inicial',
+                    saldo_anterior=0,
+                    saldo_posterior=saldo_inicial
+                )
+                cuenta.saldo = saldo_inicial
+                cuenta.save()
+
+            # Devolver la cuenta creada con el serializer completo
+            response_serializer = CuentaSerializer(cuenta)
+            return Response({
+                'message': 'Cuenta creada exitosamente',
+                'cuenta': response_serializer.data
+            }, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            return Response({
+                'message': 'Error al crear la cuenta',
+                'error': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['get'])
+    def resumen(self, request):
+        """Obtener resumen de todas las cuentas del usuario"""
+        cuentas = self.get_queryset()
+        resumen = {
+            'total_pesos': sum(c.saldo for c in cuentas if c.moneda == 'ARS'),
+            'total_dolares': sum(c.saldo for c in cuentas if c.moneda == 'USD'),
+            'total_euros': sum(c.saldo for c in cuentas if c.moneda == 'EUR'),
+            'cantidad_cuentas': cuentas.count(),
+            'cuentas': CuentaResumenSerializer(cuentas, many=True).data
+        }
+        return Response(resumen)
 
     @action(detail=True, methods=['get'])
-    def balance(self, request, pk=None):
+    def movimientos(self, request, pk=None):
+        """Obtener movimientos de una cuenta específica"""
         cuenta = self.get_object()
-        return Response({
-            'saldo': cuenta.saldo,
-            'tipo_cuenta': cuenta.tipo_cuenta.nombre,
-            'limite_extraccion': cuenta.tipo_cuenta.limite_extraccion_diario,
-            'theme': {
-                'color': '#1976d2'
-            }
-        })
+        movimientos = cuenta.movimientos.all()[:10]  # Últimos 10 movimientos
+        serializer = MovimientoCuentaSerializer(movimientos, many=True)
+        return Response(serializer.data)
 
-    @action(detail=True, methods=['post'])
-    def transferir(self, request, pk=None):
-        cuenta_origen = self.get_object()
-        monto = Decimal(request.data.get('monto', 0))
-        cuenta_destino_id = request.data.get('cuenta_destino')
-
-        try:
-            cuenta_destino = Cuenta.objects.get(id=cuenta_destino_id)
-            if cuenta_origen.saldo >= monto:
-                # Crear movimientos
-                MovimientoCuenta.objects.create(
-                    cuenta=cuenta_origen,
-                    tipo='RETIRO',
-                    monto=monto,
-                    descripcion=f'Transferencia a cuenta {cuenta_destino.numero}'
-                )
-                MovimientoCuenta.objects.create(
-                    cuenta=cuenta_destino,
-                    tipo='DEPOSITO',
-                    monto=monto,
-                    descripcion=f'Transferencia desde cuenta {cuenta_origen.numero}'
-                )
-                
-                # Actualizar saldos
-                cuenta_origen.saldo -= monto
-                cuenta_destino.saldo += monto
-                cuenta_origen.save()
-                cuenta_destino.save()
-
-                return Response({
-                    'message': 'Transferencia exitosa',
-                    'status': 'success',
-                    'theme': {
-                        'color': '#1976d2'
-                    }
-                })
-            else:
-                return Response({
-                    'message': 'Saldo insuficiente',
-                    'status': 'error',
-                    'theme': {
-                        'color': '#9c27b0'
-                    }
-                }, status=status.HTTP_400_BAD_REQUEST)
-        except Cuenta.DoesNotExist:
-            return Response({
-                'message': 'Cuenta destino no encontrada',
-                'status': 'error',
-                'theme': {
-                    'color': '#9c27b0'
-                }
-            }, status=status.HTTP_404_NOT_FOUND)
-
-class MovimientoCuentaViewSet(viewsets.ModelViewSet):
+class MovimientoCuentaViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = MovimientoCuentaSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        queryset = MovimientoCuenta.objects.all()
-        if not self.request.user.is_staff:
-            queryset = queryset.filter(cuenta__cliente__user=self.request.user)
+        queryset = MovimientoCuenta.objects.filter(
+            cuenta__titular=self.request.user
+        )
 
         # Filtros
         cuenta_id = self.request.query_params.get('cuenta_id')
@@ -116,10 +123,11 @@ class MovimientoCuentaViewSet(viewsets.ModelViewSet):
         if hasta:
             queryset = queryset.filter(fecha__lte=hasta)
 
-        return queryset
+        return queryset.select_related('cuenta')
 
     @action(detail=False, methods=['get'])
     def resumen(self, request):
+        """Obtener resumen de movimientos"""
         cuenta_id = request.query_params.get('cuenta_id')
         desde = timezone.now() - timedelta(days=30)
         
@@ -129,20 +137,19 @@ class MovimientoCuentaViewSet(viewsets.ModelViewSet):
         )
 
         ingresos = movimientos.filter(
-            tipo='DEPOSITO'
+            tipo__in=['DEPOSITO', 'TRANSFERENCIA_RECIBIDA']
         ).aggregate(total=Sum('monto'))['total'] or 0
 
         egresos = movimientos.filter(
-            tipo='RETIRO'
+            tipo__in=['RETIRO', 'TRANSFERENCIA_ENVIADA', 'PAGO_SERVICIO']
         ).aggregate(total=Sum('monto'))['total'] or 0
 
         return Response({
             'ingresos': ingresos,
             'egresos': egresos,
             'balance': ingresos - egresos,
-            'theme': {
-                'ingresos': '#1976d2',
-                'egresos': '#9c27b0',
-                'background': '#f5f5f5'
+            'periodo': {
+                'desde': desde,
+                'hasta': timezone.now()
             }
         })

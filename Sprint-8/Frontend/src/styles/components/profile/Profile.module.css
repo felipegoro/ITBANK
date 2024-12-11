@@ -1,113 +1,136 @@
 .profileContainer {
-    padding: var(--spacing-lg);
-    background-color: var(--light);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: white;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 2rem;
 }
 
-.title {
-    font-size: var(--font-size-xl);
-    color: var(--dark);
-    font-weight: 600;
+.header h1 {
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+    font-weight: normal;
 }
 
 .editButton {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    background-color: var(--primary-color);
-    color: var(--light);
-    border: none;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .editButton:hover {
-    background-color: var(--primary-dark);
+    background: #0056b3;
+    transform: translateY(-2px);
 }
 
-.profileContent {
-    display: grid;
-    gap: var(--spacing-xl);
+.profileCard {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 2rem;
 }
 
-.profileSection {
-    background-color: var(--gray-light);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-.sectionTitle {
-    font-size: var(--font-size-lg);
-    color: var(--dark);
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--primary-color);
+.avatarContainer {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userMainInfo h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: white;
+    font-weight: normal;
+}
+
+.userType {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 .infoGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.infoSection {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.infoSection h3 {
+    color: #007bff;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: normal;
+}
+
+.infoContainer {
+    display: grid;
+    gap: 1rem;
 }
 
 .infoItem {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: 0.5rem;
 }
 
-.infoLabel {
-    font-size: var(--font-size-sm);
-    color: var(--gray);
+.infoItem label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: normal;
 }
 
-.infoValue {
-    font-size: var(--font-size-md);
-    color: var(--dark);
-    font-weight: 500;
+.infoItem span {
+    color: white;
+    font-size: 1rem;
+    font-weight: normal;
 }
 
-.securitySection {
-    margin-top: var(--spacing-xl);
-}
-
-.securityButton {
-    padding: var(--spacing-md);
-    background-color: var(--light);
-    border: 1px solid var(--gray-light);
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.securityButton:hover {
-    background-color: var(--gray-light);
-    transform: translateY(-2px);
-}
-
-/* Responsive */
 @media (max-width: 768px) {
     .profileContainer {
-        padding: var(--spacing-md);
+        padding: 1rem;
+    }
+
+    .infoGrid {
+        grid-template-columns: 1fr;
     }
 
     .header {
         flex-direction: column;
-        gap: var(--spacing-md);
-        align-items: stretch;
-    }
-
-    .editButton {
-        width: 100%;
+        gap: 1rem;
+        text-align: center;
     }
 }

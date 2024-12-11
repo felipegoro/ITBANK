@@ -1,148 +1,107 @@
 .editContainer {
-    padding: var(--spacing-lg);
-    background-color: var(--light);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-xl);
-}
-
-.title {
-    font-size: var(--font-size-xl);
-    color: var(--dark);
-    font-weight: 600;
-}
-
-.form {
-    display: grid;
-    gap: var(--spacing-lg);
+    padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
 }
 
-.formSection {
-    background-color: var(--gray-light);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-md);
+.title {
+    color: white;
+    font-size: 2rem;
+    font-weight: normal;
+    margin-bottom: 2rem;
 }
 
-.sectionTitle {
-    font-size: var(--font-size-lg);
-    color: var(--dark);
-    margin-bottom: var(--spacing-lg);
+.form {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.formSection h3 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 2rem;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.label {
-    font-size: var(--font-size-md);
-    color: var(--dark);
-    font-weight: 500;
+.formGroup label {
+    color: white;
+    font-size: 0.9rem;
 }
 
 .input {
-    padding: var(--spacing-md);
-    border: 1px solid var(--gray-light);
-    border-radius: var(--border-radius-md);
-    font-size: var(--font-size-md);
-    transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem;
+    color: white;
+    font-size: 1rem;
 }
 
-.input:focus {
-    border-color: var(--primary-color);
-    outline: none;
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
-.error {
-    color: var(--danger-color);
-    font-size: var(--font-size-sm);
-    margin-top: var(--spacing-xs);
+.input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .buttonGroup {
     display: flex;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-xl);
-}
-
-.saveButton {
-    padding: var(--spacing-md) var(--spacing-lg);
-    background-color: var(--primary-color);
-    color: var(--light);
-    border: none;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1;
-}
-
-.saveButton:hover {
-    background-color: var(--primary-dark);
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
 }
 
 .cancelButton {
-    padding: var(--spacing-md) var(--spacing-lg);
-    background-color: var(--light);
-    color: var(--dark);
-    border: 1px solid var(--gray-light);
-    border-radius: var(--border-radius-md);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    flex: 1;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.saveButton {
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
 }
 
 .cancelButton:hover {
-    background-color: var(--gray-light);
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.avatarSection {
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
+.saveButton:hover {
+    background: #0056b3;
 }
 
-.avatarPreview {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-bottom: var(--spacing-md);
-    object-fit: cover;
-}
-
-.uploadButton {
-    padding: var(--spacing-sm) var(--spacing-md);
-    background-color: var(--secondary-color);
-    color: var(--light);
-    border: none;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.uploadButton:hover {
-    background-color: var(--secondary-dark);
-}
-
-/* Responsive */
 @media (max-width: 768px) {
     .editContainer {
-        padding: var(--spacing-md);
+        padding: 1rem;
     }
 
     .buttonGroup {
         flex-direction: column;
     }
 
-    .formSection {
-        padding: var(--spacing-md);
+    .cancelButton,
+    .saveButton {
+        width: 100%;
     }
 }

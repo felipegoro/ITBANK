@@ -1,19 +1,23 @@
 from rest_framework import serializers
 from .models import Usuario, Transaccion
+from .models import Usuario
 
 class UsuarioSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    
     class Meta:
         model = Usuario
-        fields = '__all__'
-        read_only_fields = ('fecha_registro',)
+        fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name', 'dni', 'fecha_nacimiento')
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
-    def validate_numero_documento(self, value):
-        if self.instance and self.instance.numero_documento == value:
-            return value
-        if Usuario.objects.filter(numero_documento=value).exists():
-            raise serializers.ValidationError("Este número de documento ya está registrado")
-        return value
-
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = Usuario(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 class TransaccionSerializer(serializers.ModelSerializer):
     emisor_nombre = serializers.CharField(source='emisor.nombre', read_only=True)
     receptor_nombre = serializers.CharField(source='receptor.nombre', read_only=True)

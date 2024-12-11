@@ -21,80 +21,94 @@ import LoanApplication from './components/loans/LoanApplication';
 import Profile from './components/profile/Profile';
 import ProfileEdit from './components/profile/ProfileEdit';
 import NotFound from './components/common/NotFound';
-import './styles/index.css';  // Añade esta línea al inicio de tus imports
+import AccountForm from './components/accounts/AccountForm'; 
+
+// Páginas públicas
+import About from './components/page/About';
+import Contact from './components/page/Contact';
+import Help from './components/page/Help';
 
 const App = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+    // Componente de ruta protegida
+    const ProtectedRoute = ({ children }) => {
+        if (!isAuthenticated) {
+            return <Navigate to="/login" replace />;
+        }
+        return children;
+    };
+
+    // Componente de ruta de autenticación
+    const AuthRoute = ({ children }) => {
+        if (isAuthenticated) {
+            return <Navigate to="/dashboard" replace />;
+        }
+        return children;
+    };
+
     return (
         <Router>
             <Routes>
-                {/* Rutas públicas */}
+                {/* Rutas de autenticación */}
                 <Route element={<AuthLayout />}>
                     <Route 
                         path="/login" 
-                        element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard" />} 
+                        element={
+                            <AuthRoute>
+                                <Login />
+                            </AuthRoute>
+                        } 
                     />
                     <Route 
                         path="/register" 
-                        element={!isAuthenticated ? <Register /> : <Navigate to="/dashboard" />} 
+                        element={
+                            <AuthRoute>
+                                <Register />
+                            </AuthRoute>
+                        } 
                     />
                 </Route>
 
                 {/* Rutas protegidas */}
-                <Route element={<MainLayout />}>
-                    <Route 
-                        path="/dashboard" 
-                        element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/accounts" 
-                        element={isAuthenticated ? <AccountList /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/accounts/:id" 
-                        element={isAuthenticated ? <AccountDetail /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/cards" 
-                        element={isAuthenticated ? <CardList /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/cards/:id" 
-                        element={isAuthenticated ? <CardDetail /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/transactions" 
-                        element={isAuthenticated ? <TransactionList /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/transactions/new" 
-                        element={isAuthenticated ? <TransactionForm /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/loans" 
-                        element={isAuthenticated ? <LoanList /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/loans/apply" 
-                        element={isAuthenticated ? <LoanApplication /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/profile" 
-                        element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} 
-                    />
-                    <Route 
-                        path="/profile/edit" 
-                        element={isAuthenticated ? <ProfileEdit /> : <Navigate to="/login" />} 
-                    />
+                <Route 
+                    element={
+                        <ProtectedRoute>
+                            <MainLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/accounts/new" element={<AccountForm />} />
+                    <Route path="/accounts/:id" element={<AccountDetail />} />
+                    <Route path="/accounts" element={<AccountList />} />
+                    <Route path="/cards" element={<CardList />} />
+                    <Route path="/cards/:id" element={<CardDetail />} />
+                    <Route path="/transactions" element={<TransactionList />} />
+                    <Route path="/transactions/new" element={<TransactionForm />} />
+                    <Route path="/loans" element={<LoanList />} />
+                    <Route path="/loans/apply" element={<LoanApplication />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/edit" element={<ProfileEdit />} />
                 </Route>
+
+                {/* Rutas públicas */}
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/help" element={<Help />} />
 
                 {/* Ruta por defecto */}
                 <Route 
                     path="/" 
-                    element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} 
+                    element={
+                        isAuthenticated ? (
+                            <Navigate to="/dashboard" replace />
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    } 
                 />
-                
+
                 {/* Ruta 404 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

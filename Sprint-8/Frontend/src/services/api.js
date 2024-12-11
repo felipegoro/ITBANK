@@ -1,13 +1,15 @@
 import axios from 'axios';
+import { store } from '../app/store';
+import { resetAuth } from '../features/auth/authSlice'; // Cambiado de resetAuthState a resetAuth
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api',
+    baseURL: 'http://localhost:8000/api',
     headers: {
-        'Content-Type': 'application/json'
-    }
+        'Content-Type': 'application/json',
+    },
 });
 
-// Interceptor para agregar el token a las peticiones
+// Interceptor para añadir el token
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
@@ -21,13 +23,15 @@ api.interceptors.request.use(
     }
 );
 
-// Interceptor para manejar errores de respuesta
+// Interceptor para manejar errores
 api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
+            // Token expirado o inválido
             localStorage.removeItem('token');
-            window.location.href = '/login';
+            localStorage.removeItem('refreshToken');
+            store.dispatch(resetAuth()); // Cambiado de resetAuthState a resetAuth
         }
         return Promise.reject(error);
     }

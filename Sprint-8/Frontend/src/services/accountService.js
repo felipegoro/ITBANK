@@ -2,32 +2,37 @@ import api from './api';
 
 const accountService = {
     getAllAccounts: async () => {
-        const response = await api.get('/accounts');
+        const response = await api.get('/cuentas/');
         return response.data;
     },
 
-    getAccountById: async (accountId) => {
-        const response = await api.get(`/accounts/${accountId}`);
-        return response.data;
-    },
-
-    getAccountTransactions: async (accountId, params = {}) => {
-        const response = await api.get(`/accounts/${accountId}/transactions`, { params });
-        return response.data;
-    },
-
-    getAccountBalance: async (accountId) => {
-        const response = await api.get(`/accounts/${accountId}/balance`);
+    getAccountTypes: async () => {
+        const response = await api.get('/tipos-cuenta/');  // Ajusta esta ruta según tu API
         return response.data;
     },
 
     createAccount: async (accountData) => {
-        const response = await api.post('/accounts', accountData);
+        const response = await api.post('/cuentas/', accountData);
         return response.data;
     },
 
-    updateAccount: async (accountId, accountData) => {
-        const response = await api.put(`/accounts/${accountId}`, accountData);
+    getAccountById: async (accountId) => {
+        const response = await api.get(`/cuentas/${accountId}/`);
+        return response.data;
+    },
+
+    getAccountMovements: async (accountId) => {
+        const response = await api.get(`/cuentas/${accountId}/movimientos/`);
+        return response.data;
+    },
+
+    getAccountsSummary: async () => {
+        const response = await api.get('/cuentas/resumen/');
+        return response.data;
+    },
+
+    transferFunds: async (accountId, transferData) => {
+        const response = await api.post(`/cuentas/${accountId}/transferir/`, transferData);
         return response.data;
     }
 };

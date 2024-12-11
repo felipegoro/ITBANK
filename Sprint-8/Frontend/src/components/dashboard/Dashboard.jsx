@@ -1,75 +1,83 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchDashboardData, selectDashboardData } from '../../features/dashboard/dashboardSlice';
-import AccountSummary from './AccountSummary';
-import RecentTransactions from './RecentTransactions';
-import Loading from '../common/Loading';
-import styles from '../../styles/pages/Dashboard.module.css';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import styles from '../../styles/pages/Dashboard.module.css'; // Cambiada la ruta de importación
 
 const Dashboard = () => {
-    const dispatch = useDispatch();
-    const { isLoading, error } = useSelector((state) => state.dashboard);
-    const dashboardData = useSelector(selectDashboardData);
-    const { user } = useSelector((state) => state.auth);
+    const navigate = useNavigate();
+    const { user } = useSelector(state => state.auth);
+    
+    const currentDate = new Date().toLocaleDateString('es-ES', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 
-    useEffect(() => {
-        const loadDashboard = async () => {
-            try {
-                await dispatch(fetchDashboardData()).unwrap();
-            } catch (err) {
-                console.error('Error al cargar el dashboard:', err);
-            }
-        };
-        
-        loadDashboard();
-    }, [dispatch]);
-
-    if (isLoading) {
-        return (
-            <div className={styles.dashboard}>
-                <div className={styles.loadingContainer}>
-                    <Loading />
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className={styles.dashboard}>
-                <div className={styles.errorContainer}>
-                    <h2>Error</h2>
-                    <p className={styles.errorMessage}>{error}</p>
-                    <button 
-                        className={styles.retryButton}
-                        onClick={() => dispatch(fetchDashboardData())}
-                    >
-                        Intentar nuevamente
-                    </button>
-                </div>
-            </div>
-        );
-    }
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
 
     return (
-        <div className={styles.dashboard}>
-            <div className={styles.welcomeSection}>
-                <h1>Bienvenido, {user?.nombre || 'Usuario'}</h1>
-                <p className={styles.date}>
-                    {new Date().toLocaleDateString('es-ES', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    })}
-                </p>
-            </div>
-            <div className={styles.dashboardContent}>
-                <AccountSummary data={dashboardData.accountSummary} />
-                <RecentTransactions transactions={dashboardData.recentTransactions} />
+        <div className={styles.dashboardContainer}>
+            <section className={styles.welcomeSection}>
+                <h1 className={styles.welcomeTitle}>¡Bienvenido!</h1>
+                <p className={styles.dateDisplay}>{currentDate}</p>
+            </section>
+
+            <div className={styles.dashboardGrid}>
+                {/* Resumen de Cuentas */}
+                <div className={styles.card}>
+                    <div className={styles.cardTitle}>
+                        <h2>Resumen de Cuentas</h2>
+                        <button 
+                            onClick={() => handleNavigate('/accounts')} 
+                            className={styles.viewAllLink}
+                        >
+                            
+                        </button>
+                    </div>
+                    <div className={styles.accountSummary}>
+                        <div>Balance Total</div>
+                        <div className={styles.balanceAmount}>$1500</div>
+                    </div>
+                </div>
+
+                {/* Movimientos Recientes */}
+                <div className={styles.card}>
+                    <div className={styles.cardTitle}>
+                        <h2>Movimientos Recientes</h2>
+                        <button 
+                            onClick={() => handleNavigate('/transactions')} 
+                            className={styles.viewAllLink}
+                        >
+                            
+                        </button>
+                    </div>
+                    <ul className={styles.transactionList}>
+                        <li className={styles.transactionItem}>
+                            <div className={styles.transactionInfo}>
+                                <span className={styles.transactionDate}>14/3/2024</span>
+                                <span className={styles.transactionDescription}>Depósito</span>
+                            </div>
+                            <span className={`${styles.transactionAmount} ${styles.positive}`}>
+                                +$1000
+                            </span>
+                        </li>
+                        <li className={styles.transactionItem}>
+                            <div className={styles.transactionInfo}>
+                                <span className={styles.transactionDate}>13/3/2024</span>
+                                <span className={styles.transactionDescription}>Pago servicios</span>
+                            </div>
+                            <span className={`${styles.transactionAmount} ${styles.negative}`}>
+                                -$500
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );
 };
 
-export default Dashboard;   
+export default Dashboard;

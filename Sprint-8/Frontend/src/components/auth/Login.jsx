@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../../features/auth/authSlice';
+import { login } from '../../features/auth/authThunks';
+import { clearError } from '../../features/auth/authSlice';
 import styles from '../../styles/pages/Login.module.css';
 
 const Login = () => {
@@ -9,9 +10,17 @@ const Login = () => {
         username: '',
         password: ''
     });
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isLoading, error } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        dispatch(clearError());
+        return () => {
+            dispatch(clearError());
+        };
+    }, [dispatch]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -27,7 +36,7 @@ const Login = () => {
             await dispatch(login(credentials)).unwrap();
             navigate('/dashboard');
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
+            console.error('Login error:', error);
         }
     };
 
@@ -37,7 +46,11 @@ const Login = () => {
                 <h2 className={styles.loginTitle}>Iniciar Sesión</h2>
                 
                 <form onSubmit={handleSubmit} className={styles.loginForm}>
-                    {error && <div className={styles.errorMessage}>{error}</div>}
+                    {error && (
+                        <div className={styles.errorMessage}>
+                            {typeof error === 'string' ? error : 'Error al iniciar sesión'}
+                        </div>
+                    )}
                     
                     <div className={styles.inputGroup}>
                         <label htmlFor="username" className={styles.label}>Usuario</label>
@@ -49,6 +62,7 @@ const Login = () => {
                             onChange={handleChange}
                             className={styles.input}
                             required
+                            autoComplete="username"
                         />
                     </div>
 
@@ -62,6 +76,7 @@ const Login = () => {
                             onChange={handleChange}
                             className={styles.input}
                             required
+                            autoComplete="current-password"
                         />
                     </div>
 

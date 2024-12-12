@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import styles from '../../styles/components/common/Sidebar.module.css';
+
 
 const Sidebar = () => {
     const location = useLocation();

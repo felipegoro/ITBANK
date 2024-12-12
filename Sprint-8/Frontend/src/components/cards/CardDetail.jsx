@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCardDetails } from '../../features/cards/cardsSlice';
 import Loading from '../common/Loading';
-import styles from '../../styles/components/cards/CardDetail.module.css';
+
 
 const CardDetail = () => {
     const { id } = useParams();

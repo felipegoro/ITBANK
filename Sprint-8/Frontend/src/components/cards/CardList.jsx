@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { fetchCards } from '../../features/cards/cardsSlice';
+import React from 'react';
 import styles from '../../styles/components/cards/CardList.module.css';
 
 const CardList = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     
     const mockCards = [
         {
@@ -62,12 +57,7 @@ const CardList = () => {
                                 <div className={styles.cardBalance}>
                                     ${card.saldo.toLocaleString()}
                                 </div>
-                                <Link 
-                                    to={`/cards/${card.id}`}
-                                    className={styles.viewDetailsBtn}
-                                >
-                                    Ver Detalles
-                                </Link>
+                                
                             </div>
                         </div>
                     </div>

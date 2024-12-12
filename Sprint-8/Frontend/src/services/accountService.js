@@ -7,7 +7,7 @@ const accountService = {
     },
 
     getAccountTypes: async () => {
-        const response = await api.get('/tipos-cuenta/');  // Ajusta esta ruta según tu API
+        const response = await api.get('/cuentas/tipos/');
         return response.data;
     },
 
@@ -33,6 +33,11 @@ const accountService = {
 
     transferFunds: async (accountId, transferData) => {
         const response = await api.post(`/cuentas/${accountId}/transferir/`, transferData);
+        return response.data;
+    },
+
+    getTransactions: async () => {
+        const response = await api.get('/cuentas/movimientos/');
         return response.data;
     }
 };

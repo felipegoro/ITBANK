@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector,  } from 'react-redux';
 import styles from '../../styles/components/profile/ProfileEdit.module.css';
 
 const ProfileEdit = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
     
     const [formData, setFormData] = useState({

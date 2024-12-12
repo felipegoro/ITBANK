@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {
+    Box,
+    Container,
+    Paper,
+    Typography,
+    TextField,
+    MenuItem,
+    Button,
+    Alert,
+    CircularProgress,
+    InputAdornment,
+    Stack
+} from '@mui/material';
 import { 
     fetchLoanTypes, 
-    applyForLoan,
+    applyForLoan, 
     selectLoanTypes,
-    selectLoansLoading,
-    selectLoansError,
-    selectOperationSuccess
+    selectApplyStatus,
+    selectLoansError
 } from '../../features/loans/loansSlice';
-import styles from '../../styles/components/loans/LoanApplication.module.css';
 
 const LoanApplication = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
     const loanTypes = useSelector(selectLoanTypes);
-    const isLoading = useSelector(selectLoansLoading);
+    const status = useSelector(selectApplyStatus);
     const error = useSelector(selectLoansError);
-    const success = useSelector(selectOperationSuccess);
 
     const [formData, setFormData] = useState({
         tipo_prestamo: '',
@@ -32,21 +41,6 @@ const LoanApplication = () => {
         dispatch(fetchLoanTypes());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (success) {
-            navigate('/loans');
-        }
-    }, [success, navigate]);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await dispatch(applyForLoan(formData)).unwrap();
-        } catch (err) {
-            console.error('Error:', err);
-        }
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -55,99 +49,174 @@ const LoanApplication = () => {
         }));
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const result = await dispatch(applyForLoan(formData));
+        if (!result.error) {
+            navigate('/loans');
+        }
+    };
+
+    const plazos = [6, 12, 18, 24, 36, 48, 60];
+
     return (
-        <div className={styles.formContainer}>
-            <div className={styles.formCard}>
-                <h1 className={styles.title}>Solicitar Préstamo</h1>
-                
-                {error && <div className={styles.errorMessage}>{error}</div>}
-                
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="tipo_prestamo">Tipo de Préstamo</label>
-                        <select
-                            id="tipo_prestamo"
+        <Container maxWidth="md" sx={{ mt: 6, mb: 6 }}>
+            <Paper 
+                elevation={3} 
+                sx={{ 
+                    p: { xs: 3, md: 5 }, 
+                    borderRadius: 3,
+                    backgroundColor: 'background.paper',
+                    boxShadow: theme => theme.shadows[8]
+                }}
+            >
+                <Stack spacing={4}>
+                    <Typography 
+                        variant="h4" 
+                        component="h1" 
+                        color="primary" 
+                        align="center"
+                        sx={{ 
+                            fontWeight: 'bold',
+                            mb: 2
+                        }}
+                    >
+                        Solicitar Nuevo Préstamo
+                    </Typography>
+
+                    {error && (
+                        <Alert 
+                            severity="error" 
+                            variant="filled"
+                            sx={{ borderRadius: 2 }}
+                            action={
+                                <Button 
+                                    color="inherit" 
+                                    size="small" 
+                                    onClick={() => navigate('/login')}
+                                >
+                                    Iniciar Sesión
+                                </Button>
+                            }
+                        >
+                            {error}
+                        </Alert>
+                    )}
+
+                    <Box 
+                        component="form" 
+                        onSubmit={handleSubmit} 
+                        sx={{ 
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            gap: 3 
+                        }}
+                    >
+                        <TextField
+                            select
+                            fullWidth
+                            label="Tipo de Préstamo"
                             name="tipo_prestamo"
                             value={formData.tipo_prestamo}
                             onChange={handleChange}
                             required
+                            sx={{ backgroundColor: 'background.paper' }}
                         >
-                            <option value="">Seleccione un tipo</option>
                             {loanTypes.map((type) => (
-                                <option key={type.id} value={type.id}>
+                                <MenuItem key={type.id} value={type.nombre}>
                                     {type.nombre}
-                                </option>
+                                </MenuItem>
                             ))}
-                        </select>
-                    </div>
+                        </TextField>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="monto">Monto Solicitado</label>
-                        <input
-                            type="number"
-                            id="monto"
+                        <TextField
+                            fullWidth
+                            label="Monto Solicitado"
                             name="monto"
+                            type="number"
                             value={formData.monto}
                             onChange={handleChange}
-                            placeholder="$0.00"
-                            min="1000"
                             required
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                            }}
+                            sx={{ backgroundColor: 'background.paper' }}
                         />
-                    </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="plazo">Plazo (meses)</label>
-                        <select
-                            id="plazo"
+                        <TextField
+                            select
+                            fullWidth
+                            label="Plazo (meses)"
                             name="plazo"
                             value={formData.plazo}
                             onChange={handleChange}
                             required
+                            sx={{ backgroundColor: 'background.paper' }}
                         >
-                            <option value="">Seleccione el plazo</option>
-                            <option value="12">12 meses</option>
-                            <option value="24">24 meses</option>
-                            <option value="36">36 meses</option>
-                            <option value="48">48 meses</option>
-                            <option value="60">60 meses</option>
-                        </select>
-                    </div>
+                            {plazos.map((plazo) => (
+                                <MenuItem key={plazo} value={plazo}>
+                                    {plazo} meses
+                                </MenuItem>
+                            ))}
+                        </TextField>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="ingreso_mensual">Ingreso Mensual</label>
-                        <input
-                            type="number"
-                            id="ingreso_mensual"
+                        <TextField
+                            fullWidth
+                            label="Ingreso Mensual"
                             name="ingreso_mensual"
+                            type="number"
                             value={formData.ingreso_mensual}
                             onChange={handleChange}
-                            placeholder="$0.00"
                             required
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                            }}
+                            sx={{ backgroundColor: 'background.paper' }}
                         />
-                    </div>
 
-                    <div className={styles.formGroup}>
-                        <label htmlFor="motivo">Motivo del Préstamo</label>
-                        <textarea
-                            id="motivo"
+                        <TextField
+                            fullWidth
+                            label="Motivo del Préstamo"
                             name="motivo"
+                            multiline
+                            rows={4}
                             value={formData.motivo}
                             onChange={handleChange}
-                            placeholder="Describa el motivo de su solicitud"
                             required
+                            sx={{ backgroundColor: 'background.paper' }}
                         />
-                    </div>
 
-                    <button 
-                        type="submit" 
-                        className={styles.submitButton}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? 'Procesando...' : 'Solicitar Préstamo'}
-                    </button>
-                </form>
-            </div>
-        </div>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                            disabled={status === 'loading'}
+                            sx={{
+                                py: 2,
+                                mt: 2,
+                                fontSize: '1.1rem',
+                                fontWeight: 'bold',
+                                borderRadius: 2,
+                                textTransform: 'none',
+                                boxShadow: 4,
+                                '&:hover': {
+                                    boxShadow: 6,
+                                    transform: 'translateY(-2px)'
+                                },
+                                transition: 'all 0.3s ease'
+                            }}
+                        >
+                            {status === 'loading' ? (
+                                <CircularProgress size={24} color="inherit" />
+                            ) : (
+                                'Solicitar Préstamo'
+                            )}
+                        </Button>
+                    </Box>
+                </Stack>
+            </Paper>
+        </Container>
     );
 };
 

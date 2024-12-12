@@ -1,15 +1,10 @@
 import axios from 'axios';
-import { store } from '../app/store';
-import { resetAuth } from '../features/auth/authSlice'; // Cambiado de resetAuthState a resetAuth
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api',
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    baseURL: 'http://localhost:8000/api'
 });
 
-// Interceptor para añadir el token
+// Interceptor para agregar el token a todas las peticiones
 api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
@@ -23,15 +18,14 @@ api.interceptors.request.use(
     }
 );
 
-// Interceptor para manejar errores
+
+// Interceptor para manejar errores de autenticación
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401) {
-            // Token expirado o inválido
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            store.dispatch(resetAuth()); // Cambiado de resetAuthState a resetAuth
+        if (error.response?.status === 403 || error.response?.status === 401) {
+            // Redirigir al login si no está autenticado
+            window.location.href = '/login';
         }
         return Promise.reject(error);
     }

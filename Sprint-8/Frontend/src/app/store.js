@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from '../features/auth/authSlice';
 import accountsReducer from '../features/accounts/accountsSlice';
 import dashboardReducer from '../features/dashboard/dashboardSlice';
+import loansReducer from '../features/loans/loansSlice'; // Añade esta línea
 
 // Configuración de persistencia
 const persistConfig = {
@@ -29,6 +30,7 @@ export const store = configureStore({
         accounts: accountsReducer,
         dashboard: dashboardReducer,
         auth: persistedReducer,
+        loans: loansReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

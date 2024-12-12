@@ -21,7 +21,7 @@ export const fetchAccountTypes = createAsyncThunk(
             return rejectWithValue(error.response?.data || 'Error al obtener los tipos de cuenta');
         }
     }
-);
+);;
 
 export const createAccount = createAsyncThunk(
     'accounts/createAccount',
@@ -74,6 +74,18 @@ export const fetchAccountMovements = createAsyncThunk(
             return await accountService.getAccountMovements(accountId);
         } catch (error) {
             return rejectWithValue(error.response?.data || 'Error al obtener los movimientos');
+        }
+    }
+);
+
+export const fetchTransactions = createAsyncThunk(
+    'accounts/fetchTransactions',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await accountService.getTransactions();
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || 'Error al obtener las transacciones');
         }
     }
 );

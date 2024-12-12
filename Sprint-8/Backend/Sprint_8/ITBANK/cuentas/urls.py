@@ -4,7 +4,7 @@ from .views import CuentaViewSet, TipoCuentaViewSet, MovimientoCuentaViewSet
 
 router = DefaultRouter()
 router.register(r'cuentas', CuentaViewSet, basename='cuenta')
-router.register(r'tipos', TipoCuentaViewSet, basename='tipo-cuenta')
+router.register(r'tipos-cuenta', TipoCuentaViewSet, basename='tipo-cuenta')  # Asegúrate de que esta línea esté presente
 router.register(r'movimientos', MovimientoCuentaViewSet, basename='movimiento')
 
 urlpatterns = [

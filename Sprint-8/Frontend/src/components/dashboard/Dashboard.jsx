@@ -1,11 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import styles from '../../styles/pages/Dashboard.module.css'; // Cambiada la ruta de importación
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const { user } = useSelector(state => state.auth);
+    
     
     const currentDate = new Date().toLocaleDateString('es-ES', {
         weekday: 'long',

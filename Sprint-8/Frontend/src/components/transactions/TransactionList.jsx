@@ -1,81 +1,196 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchTransactions } from '../../features/transactions/transactionsSlice';
-import Loading from '../common/Loading';
-import styles from '../../styles/components/transactions/TransactionList.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Typography,
+    Box,
+    Container,
+    CircularProgress
+} from '@mui/material';
+import { fetchTransactions } from '../../features/accounts/accountThunks';
 
 const TransactionList = () => {
     const dispatch = useDispatch();
-    const { transactions, isLoading, error } = useSelector((state) => state.transactions);
+    const { transactions = [] } = useSelector(state => state.accounts) || {};
+    const isLoading = useSelector(state => state.accounts.isLoading);
+    const error = useSelector(state => state.accounts.error);
 
     useEffect(() => {
         dispatch(fetchTransactions());
     }, [dispatch]);
 
-    if (isLoading) return <Loading />;
+    const getStatusColor = (status) => {
+        switch (status?.toLowerCase()) {
+            case 'completada':
+                return '#4caf50';
+            case 'pendiente':
+                return '#ff9800';
+            case 'rechazada':
+                return '#f44336';
+            default:
+                return '#757575';
+        }
+    };
+
+    const getTypeIcon = (type) => {
+        switch (type?.toLowerCase()) {
+            case 'ingreso':
+                return '↑';
+            case 'egreso':
+                return '↓';
+            case 'transferencia':
+                return '↔';
+            default:
+                return '•';
+        }
+    };
+
+    if (isLoading) {
+        return (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                <CircularProgress />
+            </Box>
+        );
+    }
+
+    if (error) {
+        return (
+            <Typography color="error" sx={{ textAlign: 'center', mt: 4 }}>
+                {error}
+            </Typography>
+        );
+    }
 
     return (
-        <div className={styles.transactionListContainer}>
-            <div className={styles.header}>
-                <h1 className={styles.title}>Transferencias</h1>
-                <Link to="/transactions/new" className={styles.newTransactionButton}>
-                    Nueva Transferencia
-                </Link>
-            </div>
-
-            {error && <div className={styles.errorMessage}>{error}</div>}
-
-            <div className={styles.transactionsGrid}>
-                {transactions?.length === 0 ? (
-                    <div className={styles.emptyState}>
-                        <p>No hay transferencias realizadas</p>
-                        <Link to="/transactions/new" className={styles.newTransactionButton}>
-                            Realizar mi primera transferencia
-                        </Link>
-                    </div>
-                ) : (
-                    transactions.map((transaction) => (
-                        <div key={transaction.id} className={styles.transactionCard}>
-                            <div className={styles.transactionHeader}>
-                                <span className={styles.transactionDate}>
-                                    {new Date(transaction.fecha).toLocaleDateString()}
-                                </span>
-                                <span className={`${styles.transactionStatus} ${styles[transaction.estado.toLowerCase()]}`}>
-                                    {transaction.estado}
-                                </span>
-                            </div>
-                            
-                            <div className={styles.transactionBody}>
-                                <div className={styles.transactionAmount}>
-                                    ${transaction.monto.toLocaleString()}
-                                </div>
-                                <div className={styles.transactionDescription}>
-                                    {transaction.descripcion}
-                                </div>
-                            </div>
-
-                            <div className={styles.transactionFooter}>
-                                <div className={styles.accountInfo}>
-                                    <div className={styles.originAccount}>
-                                        De: {transaction.cuenta_origen}
-                                    </div>
-                                    <div className={styles.destinationAccount}>
-                                        Para: {transaction.cuenta_destino}
-                                    </div>
-                                </div>
-                                <Link 
-                                    to={`/transactions/${transaction.id}`}
-                                    className={styles.viewDetailsButton}
-                                >
-                                    Ver Detalles
-                                </Link>
-                            </div>
-                        </div>
-                    ))
-                )}
-            </div>
-        </div>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Paper 
+                elevation={3} 
+                sx={{
+                    p: 3,
+                    backgroundColor: 'white',
+                    borderRadius: 2
+                }}
+            >
+                <Typography 
+                    variant="h5" 
+                    sx={{ 
+                        mb: 3, 
+                        color: '#1976d2',
+                        fontWeight: 'bold'
+                    }}
+                >
+                    Historial de Transacciones
+                </Typography>
+                
+                <TableContainer>
+                    <Table sx={{ minWidth: 650 }}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ 
+                                    fontWeight: 'bold', 
+                                    backgroundColor: '#f5f5f5'
+                                }}>
+                                    Fecha
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontWeight: 'bold', 
+                                    backgroundColor: '#f5f5f5'
+                                }}>
+                                    Tipo
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontWeight: 'bold', 
+                                    backgroundColor: '#f5f5f5'
+                                }}>
+                                    Monto
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontWeight: 'bold', 
+                                    backgroundColor: '#f5f5f5'
+                                }}>
+                                    Estado
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {transactions.length > 0 ? (
+                                transactions.map((transaction) => (
+                                    <TableRow 
+                                        key={transaction.id}
+                                        sx={{ 
+                                            '&:hover': { 
+                                                backgroundColor: '#f8f9fa'
+                                            }
+                                        }}
+                                    >
+                                        <TableCell>
+                                            {new Date(transaction.fecha).toLocaleDateString('es-ES', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            })}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Box sx={{ 
+                                                display: 'flex', 
+                                                alignItems: 'center', 
+                                                gap: 1 
+                                            }}>
+                                                <span style={{ fontSize: '1.2em' }}>
+                                                    {getTypeIcon(transaction.tipo)}
+                                                </span>
+                                                {transaction.tipo}
+                                            </Box>
+                                        </TableCell>
+                                        <TableCell sx={{
+                                            color: transaction.tipo?.toLowerCase() === 'ingreso' ? '#4caf50' : '#f44336',
+                                            fontWeight: 'bold'
+                                        }}>
+                                            ${transaction.monto?.toLocaleString('es-ES', {
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2
+                                            })}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Box sx={{
+                                                display: 'inline-block',
+                                                px: 2,
+                                                py: 0.5,
+                                                borderRadius: 1,
+                                                backgroundColor: `${getStatusColor(transaction.estado)}20`,
+                                                color: getStatusColor(transaction.estado)
+                                            }}>
+                                                {transaction.estado}
+                                            </Box>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell 
+                                        colSpan={4} 
+                                        align="center"
+                                        sx={{ py: 4 }}
+                                    >
+                                        <Typography color="text.secondary">
+                                            No hay transacciones disponibles
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+        </Container>
     );
 };
 

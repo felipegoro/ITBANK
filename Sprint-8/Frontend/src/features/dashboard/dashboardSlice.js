@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+
 
 // Thunks
 export const fetchDashboardData = createAsyncThunk(

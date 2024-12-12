@@ -6,10 +6,10 @@ import {
     fetchAccountDetail,
     transferFunds,
     fetchAccountSummary,
-    fetchAccountMovements
+    fetchAccountMovements,
+    fetchTransactions
 } from './accountThunks';
 
-// Función auxiliar para manejar errores
 const getErrorMessage = (payload) => {
     if (typeof payload === 'string') return payload;
     return payload?.detail || payload?.message || payload?.error || 'Ha ocurrido un error';
@@ -19,12 +19,13 @@ const initialState = {
     accounts: [],
     accountTypes: [],
     selectedAccount: null,
-    accountSummary: null,
-    movements: [],
+    transactions: [],
     isLoading: false,
     error: null,
-    transferStatus: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    createAccountStatus: 'idle' // 'idle' | 'loading' | 'succeeded' | 'failed'
+    transferStatus: 'idle',
+    createAccountStatus: 'idle',
+    accountSummary: null,
+    movements: []
 };
 
 const accountsSlice = createSlice({
@@ -61,9 +62,9 @@ const accountsSlice = createSlice({
             .addCase(fetchAccounts.rejected, (state, action) => {
                 state.isLoading = false;
                 state.accounts = [];
-                state.error = action.payload || 'Error al cargar las cuentas';
+                state.error = getErrorMessage(action.payload);
             })
-            
+
             // Fetch account types cases
             .addCase(fetchAccountTypes.pending, (state) => {
                 state.isLoading = true;
@@ -78,7 +79,7 @@ const accountsSlice = createSlice({
                 state.isLoading = false;
                 state.error = getErrorMessage(action.payload);
             })
-            
+
             // Create account cases
             .addCase(createAccount.pending, (state) => {
                 state.createAccountStatus = 'loading';
@@ -116,7 +117,6 @@ const accountsSlice = createSlice({
             })
             .addCase(transferFunds.fulfilled, (state, action) => {
                 state.transferStatus = 'succeeded';
-                // Actualizar el saldo de la cuenta si viene en la respuesta
                 if (action.payload?.saldo_actual) {
                     state.selectedAccount.saldo = action.payload.saldo_actual;
                 }
@@ -124,6 +124,21 @@ const accountsSlice = createSlice({
             })
             .addCase(transferFunds.rejected, (state, action) => {
                 state.transferStatus = 'failed';
+                state.error = getErrorMessage(action.payload);
+            })
+
+            // Fetch transactions cases
+            .addCase(fetchTransactions.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(fetchTransactions.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.transactions = action.payload;
+                state.error = null;
+            })
+            .addCase(fetchTransactions.rejected, (state, action) => {
+                state.isLoading = false;
                 state.error = getErrorMessage(action.payload);
             })
 
@@ -159,7 +174,6 @@ const accountsSlice = createSlice({
     }
 });
 
-// Actions
 export const { 
     clearTransferStatus, 
     clearCreateAccountStatus, 
@@ -167,15 +181,13 @@ export const {
     resetAccountState 
 } = accountsSlice.actions;
 
-// Selectors
 export const selectAccounts = (state) => state.accounts.accounts;
 export const selectAccountTypes = (state) => state.accounts.accountTypes;
 export const selectSelectedAccount = (state) => state.accounts.selectedAccount;
 export const selectAccountSummary = (state) => state.accounts.accountSummary;
 export const selectMovements = (state) => state.accounts.movements;
+export const selectTransactions = (state) => state.accounts.transactions;
 export const selectIsLoading = (state) => state.accounts.isLoading;
 export const selectError = (state) => state.accounts.error;
-export const selectTransferStatus = (state) => state.accounts.transferStatus;
-export const selectCreateAccountStatus = (state) => state.accounts.createAccountStatus;
 
 export default accountsSlice.reducer;
